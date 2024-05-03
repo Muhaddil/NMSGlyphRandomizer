@@ -17,9 +17,9 @@ body {
   font-size: 3em; 
 }
 
-@media (max-width: 300px) {
+@media (max-width: 600px) {
   .glyph {
-    font-size: 1.5em;
+    font-size: 1em;
   }
 }
 
@@ -31,7 +31,7 @@ button, select {
 }
 
 /* Estilo para pantallas pequeñas */
-@media (max-width: 300px) {
+@media (max-width: 600px) {
   button, select {
     padding: 20px 40px;
   }
