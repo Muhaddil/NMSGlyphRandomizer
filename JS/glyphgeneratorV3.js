@@ -51,11 +51,27 @@ export const displayRandomGlyphs = () => {
 window.displayRandomGlyphs = displayRandomGlyphs;
 
 // Function to change language
-window.changeLanguage = function() {
-  var lang = document.getElementById('lang').value;
+window.changeLanguage = () => {
+  const lang = document.getElementById('lang').value;
   i18next.changeLanguage(lang);
   localStorage.setItem('i18nextLng', lang);
   $('body').localize();
+}
+
+// Function to populate the language options
+const populateLanguageOptions = () => {
+  const select = document.getElementById('lang');
+  const languageNames = {
+    en: 'English',
+    es: 'Español'
+    // You can add more languages here
+  };
+  Object.keys(i18next.options.resources).forEach((lang) => {
+    const option = document.createElement('option');
+    option.value = lang;
+    option.text = languageNames[lang];
+    select.add(option);
+  });
 }
 
 // Initialize i18next
@@ -76,11 +92,18 @@ i18next.init({
         button: "Generar Glifos"
       }
     }
-    // Puedes añadir más idiomas aquí
+    // You can add more languages here
   }
-}, function(err, t) {
-  // Inicializa la biblioteca jquery-i18next
+}, (err, t) => {
+  // Initialize the jquery-i18next library
   jqueryI18next.init(i18next, $);
-  // Traduce todo el body
+  // Translate the entire body
   $('body').localize();
+
+  // This selects the correct language option in the select
+  const lang = i18next.language;
+  document.getElementById('lang').value = lang;
+
+  // This autopopulates the language options in the select
+  populateLanguageOptions();
 });
