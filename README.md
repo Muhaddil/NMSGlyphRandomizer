@@ -1,2 +1,2 @@
-# NMSRegionGlyphRandomizer
-NMSRegionGlyphRandomizer
+# NMSGlyphRandomizer
+NMSGlyphRandomizer
