@@ -11,15 +11,32 @@ body {
     height: 100vh;
     margin: 0;
 }
+
 .glyph {
   font-family: 'NMS-Glyphs', sans-serif;
   font-size: 3em; 
 }
 
-button {
-width: auto; 
-padding: 10px 20px; 
+@media (max-width: 300px) {
+  .glyph {
+    font-size: 1.5em;
+  }
 }
+
+
+/* Estilo para pantallas grandes */
+button, select {
+  width: auto; 
+  padding: 10px 20px; 
+}
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 300px) {
+  button, select {
+    padding: 20px 40px;
+  }
+}
+
 select {
 width: auto; 
 padding: 10px 20px; 
