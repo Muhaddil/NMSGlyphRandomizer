@@ -54,14 +54,6 @@ export const displayRandomGlyphs = () => {
 // Make the displayRandomGlyphs function globally accessible
 window.displayRandomGlyphs = displayRandomGlyphs;
 
-// Function to change language
-window.changeLanguage = () => {
-  const lang = document.getElementById("lang").value;
-  i18next.changeLanguage(lang);
-  localStorage.setItem("i18nextLng", lang);
-  $("body").localize();
-};
-
 // Function to populate the language options
 const populateLanguageOptions = () => {
   const select = document.getElementById("lang");
@@ -76,6 +68,14 @@ const populateLanguageOptions = () => {
     option.text = languageNames[lang];
     select.add(option);
   });
+};
+
+// Function to change language
+window.changeLanguage = () => {
+  const lang = document.getElementById("lang").value;
+  i18next.changeLanguage(lang);
+  localStorage.setItem("i18nextLng", lang); 
+  $("body").localize();
 };
 
 // Initialize i18next
@@ -106,11 +106,11 @@ i18next.init(
     // Translate the entire body
     $("body").localize();
 
-    // This selects the correct language option in the select
-    const lang = i18next.language;
-    document.getElementById("lang").value = lang;
-
     // This autopopulates the language options in the select
     populateLanguageOptions();
+
+    // This selects the correct language option in the select
+    const lang = localStorage.getItem("i18nextLng") || i18next.language; // Get the selected language from local storage
+    document.getElementById("lang").value = lang;
   }
 );
