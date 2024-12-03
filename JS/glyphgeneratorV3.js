@@ -60,7 +60,9 @@ const populateLanguageOptions = () => {
   const languageNames = {
     en: "English",
     es: "Español",
-    // You can add more languages here
+    fr: "Français",
+    de: "Deutsch",
+    eu: "Euskara",
   };
   Object.keys(i18next.options.resources).forEach((lang) => {
     const option = document.createElement("option");
@@ -92,12 +94,32 @@ i18next.init(
       },
       es: {
         translation: {
-          title: "Generador de Glifos NMS",
-          header: "Generador de Glifos NMS",
+          title: "Generador de Glifos para NMS",
+          header: "Generador de Glifos para NMS",
           button: "Generar Glifos",
         },
       },
-      // You can add more languages here
+      fr: {
+        translation: {
+          title: "Générateur de glyphes NMS",
+          header: "Générateur de glyphes NMS",
+          button: "Générer des glyphes",
+        },
+      },
+      de: {
+        translation: {
+          title: "NMS Glyph Generator",
+          header: "NMS Glyph Generator",
+          button: "Glyphs generieren",
+        },
+      },
+      eu: {
+        translation: {
+          title: "NMS Glifo Sortzailea",
+          header: "NMS Glifo Sortzailea",
+          button: "Sortu Glifoak",
+        },
+      },
     },
   },
   (err, t) => {
