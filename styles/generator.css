@@ -1,7 +1,6 @@
-/* Asegurarse de que el texto se vea bien en todos los dispositivos */
 @font-face {
-  font-family: 'NMS-Glyphs';
-  src: url('../public/assets/fonts/NMS-Glyphs-Mono.ttf') format('truetype');
+  font-family: "NMS-Glyphs";
+  src: url("../public/assets/fonts/NMS-Glyphs-Mono.ttf") format("truetype");
 }
 
 /* Fondo dinámico con transición suave */
@@ -15,7 +14,11 @@ body {
   padding: 2rem;
   box-sizing: border-box;
   overflow-y: auto;
-  background: radial-gradient(circle, rgba(0, 0, 0, 1) 0%, rgba(20, 20, 20, 1) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(20, 20, 20, 1) 100%
+  );
   background-size: 100% 100%;
   color: #e0e0e0;
   font-family: Arial, sans-serif;
@@ -24,12 +27,12 @@ body {
 
 /* Estilo para el encabezado */
 h1 {
-  font-family: 'NMS-Glyphs', sans-serif;
-  font-size: 3rem;
+  font-family: "NMS-Glyphs", sans-serif;
+  font-size: 2.5rem;
   margin-bottom: 2rem;
   color: #ffffff;
   text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
-  animation: headerAnimation 2s ease-out; /* Animación de entrada para el encabezado */
+  animation: headerAnimation 2s ease-out;
 }
 
 @keyframes headerAnimation {
@@ -45,7 +48,7 @@ h1 {
 
 /* Estilo para los glifos generados */
 .glyph {
-  font-family: 'NMS-Glyphs', sans-serif;
+  font-family: "NMS-Glyphs", sans-serif;
   font-size: 5vw;
   max-width: 90%;
   word-wrap: break-word;
@@ -62,20 +65,43 @@ h1 {
   text-shadow: 1px 1px 10px rgba(0, 255, 0, 0.7);
 }
 
+.glyphHex {
+  font-family: Georgia, serif;
+  font-size: 2vw;
+  max-width: 90%;
+  word-wrap: break-word;
+  text-align: center;
+  margin: 20px 0;
+  color: #00ff00;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease-in-out, color 0.3s ease;
+}
+
+.glyphHex:hover {
+  transform: scale(1.1);
+  color: #00cc00;
+  text-shadow: 1px 1px 10px rgba(0, 255, 0, 0.7);
+}
+
 /* Animación de giro para los glifos */
 @keyframes spin {
   0% {
-      transform: rotateY(0deg);
+    transform: rotateY(0deg);
   }
   50% {
-      transform: rotateY(180deg);
+    transform: rotateY(180deg);
   }
   100% {
-      transform: rotateY(360deg);
+    transform: rotateY(360deg);
   }
 }
 
 .glyph.spin {
+  display: inline-block;
+  animation: spin 1s ease-out;
+}
+
+.glyphHex.spin {
   display: inline-block;
   animation: spin 1s ease-out;
 }
@@ -91,7 +117,8 @@ form {
 }
 
 /* Estilo para los botones y selectores */
-button, select {
+button,
+select {
   font-size: 1rem;
   padding: 0.6rem 1rem;
   width: auto;
@@ -106,7 +133,8 @@ button, select {
   margin-bottom: 1.5rem;
 }
 
-button:hover, select:hover {
+button:hover,
+select:hover {
   background-color: #444444;
   transform: translateY(-2px);
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.5);
@@ -139,6 +167,17 @@ button {
   text-align: center;
   display: flex;
   justify-content: center;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+button.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+button.visible {
+  opacity: 1;
+  visibility: visible;
 }
 
 /* Efecto de sombra flotante en el pie de página */
@@ -164,16 +203,55 @@ footer {
 /* Ajustes responsivos */
 @media (max-width: 600px) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
 
   .glyph {
     font-size: 8vw;
   }
 
-  button, select {
+  button,
+  select {
     font-size: 0.9rem;
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
   }
+
+  /* .logo {
+    max-width: 15rem;
+  } */
+}
+
+.notification {
+  position: fixed;
+  top: 20px;
+  right: -300px;
+  width: 250px;
+  padding: 1rem;
+  background-color: #4caf50;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+  transition: right 0.5s ease, opacity 0.5s ease;
+  opacity: 0;
+  z-index: 1000;
+}
+
+.notification.error {
+  background-color: #f44336;
+}
+
+.notification.visible {
+  right: 20px;
+  opacity: 1;
+}
+
+.logo {
+  max-width: 27%;
+  height: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 1rem;
 }

@@ -13,13 +13,19 @@
 </head>
 
 <body>
+    <a href="https://nmscd.com/" target="_blank" rel="noopener noreferrer">
+        <img src="https://wiki.nmscd.com/assets/images/webp/shared/nmscdbannerwhite.webp" alt="Logo NMS" class="logo">
+    </a>
     <select id="lang" onchange="changeLanguage()">
         <!-- Options will be added here with JavaScript -->
     </select>
     <h1 data-i18n="header">Generador de Glifos NMS</h1>
     <button id="generateButton" onclick="displayRandomGlyphs()" data-i18n="button">Generar Glifos</button>
+    <button id="copyButton" onclick="copyToClipboard()" disabled data-i18n="copyButton">Copiar Código</button>
     <p id="glyphOutput" class="glyph"></p>
+    <p id="glyphOutputHex" class="glyphHex"></p>
     <footer id="footer" class="footer"></footer>
     <script src="./JS/glyphgeneratorV3.js" type="module"></script>
 </body>
+
 </html>
