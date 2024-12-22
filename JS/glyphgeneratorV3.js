@@ -1,15 +1,39 @@
-// Function to generate a random glyph
-export const randomGlyph = () =>
-  "0123456789ABCDEF"[Math.floor(Math.random() * 16)];
+const validPortalKeys = '0123456789ABCDEF';
 
-// Function to generate random glyphs
-export const generateGlyphs = () => {
-  // Generate a string of random glyphs, always starting with '0'
-  const glyphs = "0" + Array.from({ length: 11 }, randomGlyph).join("");
-  // Return the glyphs
-  return glyphs;
+const randomGlyph = () => {
+  return validPortalKeys[Math.floor(Math.random() * validPortalKeys.length)];
 };
 
+const generateGlyphs = () => {
+  const regionInput = document.getElementById("regionInput").value.trim().toUpperCase();
+  
+  let glyphs = "0";
+
+  for (let i = 1; i <= 3; i++) {
+    glyphs += randomGlyph();
+  }
+
+  if (regionInput.length >= 12) {
+    for (let i = 0; i < 8; i++) {
+      if (validPortalKeys.includes(regionInput[i])) {
+        glyphs += regionInput[i];
+      } else {
+        alert("Por favor, ingresa solo glifos válidos.");
+        return "";
+      }
+    }
+  } else {
+    for (let i = 0; i < 8; i++) {
+      glyphs += randomGlyph();
+    }
+  }
+
+  while (glyphs.length < 12) {
+    glyphs += randomGlyph();
+  }
+
+  return glyphs;
+};
 document.addEventListener("DOMContentLoaded", () => {
   const generateButton = document.getElementById("generateButton");
   const copyButton = document.getElementById("copyButton");
@@ -24,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   glyphOutputHex.innerHTML = "";
 });
 
-export const displayRandomGlyphs = () => {
+const displayRandomGlyphs = () => {
   const generateButton = document.getElementById("generateButton");
   const copyButton = document.getElementById("copyButton");
   const glyphOutput = document.getElementById("glyphOutput");
@@ -33,10 +57,13 @@ export const displayRandomGlyphs = () => {
   generateButton.disabled = true;
   copyButton.disabled = true;
 
-  copyButton.classList.remove("visible");
-  // copyButton.classList.add("hidden");
-
   const glyphs = generateGlyphs();
+
+  if (!glyphs) {
+    generateButton.disabled = false;
+    return;
+  }
+
   const portalCodeText = i18next.t("portalCode");
 
   glyphOutput.innerHTML = Array.from(
@@ -68,7 +95,6 @@ export const displayRandomGlyphs = () => {
         if (i === glyphs.length - 1) {
           generateButton.disabled = false;
           copyButton.disabled = false;
-
           copyButton.classList.remove("hidden");
           copyButton.classList.add("visible");
         }
@@ -171,6 +197,7 @@ i18next.init(
           copyButton: "Copy",
           copiedSuccess: "Code copied to clipboard!",
           copiedFail: "Error copying the code.",
+          glyphinput: "Glyphs (12): Optional",
         },
       },
       es: {
@@ -182,6 +209,7 @@ i18next.init(
           copyButton: "Copiar",
           copiedSuccess: "¡Código copiado al portapapeles!",
           copiedFail: "Error al copiar el código.",
+          glyphinput: "Glifos (12): Opcional",
         },
       },
       fr: {
@@ -193,6 +221,7 @@ i18next.init(
           copyButton: "Copier",
           copiedSuccess: "Code copié dans le presse-papiers !",
           copiedFail: "Erreur lors de la copie du code.",
+          glyphinput: "Glyphes (12): Facultatif",
         },
       },
       de: {
@@ -204,6 +233,7 @@ i18next.init(
           copyButton: "Kopieren",
           copiedSuccess: "Code in die Zwischenablage kopiert!",
           copiedFail: "Fehler beim Kopieren des Codes.",
+          glyphinput: "Glyphs (12): Optional",
         },
       },
       eu: {
@@ -215,6 +245,7 @@ i18next.init(
           copyButton: "Kopiatu",
           copiedSuccess: "Kodea ondo kopiatu da!",
           copiedFail: "Errorea kodea kopiatzerakoan.",
+          glyphinput: "Glifoak (12): Aukerakoa",
         },
       },
     },
