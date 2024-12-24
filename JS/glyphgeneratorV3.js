@@ -21,9 +21,13 @@ const generateGlyphs = () => {
         return "";
       }
     }
+  } else if (regionInput.length > 0 && regionInput.length < 12) {
+    for (let i = 0; i < 8; i++) {
+      glyphs += randomGlyph();
+      showNotification(i18next.t("fullportalcode"), "error");
+    }
   } else {
     for (let i = 0; i < 8; i++) {
-      showNotification(i18next.t("fullportalcode"), "error");
       glyphs += randomGlyph();
     }
   }
