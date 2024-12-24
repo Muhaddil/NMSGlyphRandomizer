@@ -18,12 +18,12 @@ const generateGlyphs = () => {
       if (validPortalKeys.includes(regionInput[i])) {
         glyphs += regionInput[i];
       } else {
-        alert("Por favor, ingresa solo glifos válidos.");
         return "";
       }
     }
   } else {
     for (let i = 0; i < 8; i++) {
+      showNotification(i18next.t("fullportalcode"), "error");
       glyphs += randomGlyph();
     }
   }
@@ -34,7 +34,6 @@ const generateGlyphs = () => {
 
   return glyphs;
 };
-
 
 document.addEventListener("DOMContentLoaded", () => {
   const generateButton = document.getElementById("generateButton");
@@ -200,6 +199,7 @@ i18next.init(
           copiedSuccess: "Code copied to clipboard!",
           copiedFail: "Error copying the code.",
           glyphinput: "Glyphs (12): Optional",
+          fullportalcode: "You need to insert the full portal-code!",
         },
       },
       es: {
@@ -212,6 +212,7 @@ i18next.init(
           copiedSuccess: "¡Código copiado al portapapeles!",
           copiedFail: "Error al copiar el código.",
           glyphinput: "Glifos (12): Opcional",
+          fullportalcode: "¡Es necesario insertar el código completo del portal!",
         },
       },
       fr: {
@@ -224,6 +225,7 @@ i18next.init(
           copiedSuccess: "Code copié dans le presse-papiers !",
           copiedFail: "Erreur lors de la copie du code.",
           glyphinput: "Glyphes (12): Facultatif",
+          fullportalcode: "Vous devez insérer le code complet du portail !",
         },
       },
       de: {
@@ -236,6 +238,7 @@ i18next.init(
           copiedSuccess: "Code in die Zwischenablage kopiert!",
           copiedFail: "Fehler beim Kopieren des Codes.",
           glyphinput: "Glyphs (12): Optional",
+          fullportalcode: "Sie müssen den vollständigen Portalcode eingeben!",
         },
       },
       eu: {
@@ -248,6 +251,7 @@ i18next.init(
           copiedSuccess: "Kodea ondo kopiatu da!",
           copiedFail: "Errorea kodea kopiatzerakoan.",
           glyphinput: "Glifoak (12): Aukerakoa",
+          fullportalcode: "Atariaren kode osoa sartu behar duzu!",
         },
       },
     },
