@@ -14,7 +14,7 @@ const generateGlyphs = () => {
   }
 
   if (regionInput.length >= 12) {
-    for (let i = 0; i < 8; i++) {
+    for (let i = 4; i < 12; i++) {
       if (validPortalKeys.includes(regionInput[i])) {
         glyphs += regionInput[i];
       } else {
@@ -34,6 +34,8 @@ const generateGlyphs = () => {
 
   return glyphs;
 };
+
+
 document.addEventListener("DOMContentLoaded", () => {
   const generateButton = document.getElementById("generateButton");
   const copyButton = document.getElementById("copyButton");
