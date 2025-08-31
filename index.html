@@ -2,53 +2,65 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <link rel="stylesheet" href="./styles/generator.css">
-    <title data-i18n="title">Generador de Glifos NMS</title>
-    <script src="https://unpkg.com/i18next/dist/umd/i18next.js"></script>
-    <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
-    <script src="https://unpkg.com/jquery-i18next/jquery-i18next.min.js"></script>
-    <script src="./JS/glyphgeneratorV3.js" type="module"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./styles/generator.css">
+  <title data-i18n="title">Generador de Glifos NMS</title>
+  <script src="https://unpkg.com/i18next/dist/umd/i18next.js"></script>
+  <script src="https://unpkg.com/jquery/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/jquery-i18next/jquery-i18next.min.js"></script>
+  <script src="./JS/glyphgeneratorV3.js" type="module"></script>
 </head>
 
 <body>
-    <a href="https://nmscd.com/" target="_blank" rel="noopener noreferrer">
-        <img src="https://wiki.nmscd.com/assets/images/webp/shared/nmscdbannerwhite.webp" alt="Logo NMS" class="logo">
-    </a>
+  <a href="https://nmscd.com/" target="_blank" rel="noopener noreferrer">
+    <img src="https://wiki.nmscd.com/assets/images/webp/shared/nmscdbannerwhite.webp" alt="Logo NMS" class="logo">
+  </a>
+
+  <div class="language-selector">
     <select id="lang" onchange="changeLanguage()">
-        <!-- Options will be added here with JavaScript -->
+      Options will be populated by JavaScript
     </select>
+  </div>
+
+  <div class="container">
     <h1 data-i18n="header">Generador de Glifos NMS</h1>
-    <label for="regionInput" data-i18n="glyphinput">Introduce glifos (12):</label>
-    <div class="table-cell data">
-        <input type="text" id="regionInput" maxlength="12" oninput="glyphInputOnChange(this)" />
-   </div>
-    <button id="generateButton" onclick="displayRandomGlyphs()" data-i18n="button">Generar Glifos</button>
-    <button id="copyButton" onclick="copyToClipboard()" disabled data-i18n="copyButton">Copiar Código</button>
-    <p id="glyphOutput" class="glyph"></p>
-    <p id="glyphOutputHex" class="glyphHex"></p>
-    <footer id="footer" class="footer"></footer>
+
+    <div class="input-group">
+      <label for="regionInput" data-i18n="glyphinput">Introduce glifos (12):</label>
+      <input type="text" id="regionInput" maxlength="12" oninput="glyphInputOnChange(this)" placeholder="Opcional">
+    </div>
+
+    <div class="button-group">
+      <button id="generateButton" class="primary" onclick="displayRandomGlyphs()" data-i18n="button">Generar
+        Glifos</button>
+      <button id="copyButton" onclick="copyToClipboard()" disabled data-i18n="copyButton">Copiar Código</button>
+    </div>
+
+    <div class="glyph-output" id="glyphOutputContainer">
+      <div id="glyphOutput" class="glyph-display"></div>
+      <div id="glyphOutputHex" class="glyph-hex"></div>
+    </div>
+  </div>
 </body>
 
 </html>
 
 <script>
-const validPortalKeys = '0123456789ABCDEF';
+  const validPortalKeys = '0123456789ABCDEF';
 
-function glyphInputOnChange(input) {
-  let newValue = input.value.toUpperCase();
+  function glyphInputOnChange(input) {
+    let newValue = input.value.toUpperCase();
 
-  input.value = validateGlyphInput(newValue);
-}
+    input.value = validateGlyphInput(newValue);
+  }
 
-function validateGlyphInput(glyphString) {
-  const formattedString = glyphString
-    .split('')
-    .filter(char => validPortalKeys.includes(char))
-    .join('');
+  function validateGlyphInput(glyphString) {
+    const formattedString = glyphString
+      .split('')
+      .filter(char => validPortalKeys.includes(char))
+      .join('');
 
-  return formattedString.substring(0, 12);
-}
+    return formattedString.substring(0, 12);
+  }
 </script>
