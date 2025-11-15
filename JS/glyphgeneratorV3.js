@@ -11,9 +11,9 @@ const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 const requestQueue = [];
 let isProcessing = false;
 let lastRequestTime = 0;
-const MIN_REQUEST_INTERVAL = 30000;
+const MIN_REQUEST_INTERVAL = 35000;
 
-const ESTIMATED_TOTAL_ITEMS = 7000;
+const ESTIMATED_TOTAL_ITEMS = 7500;
 const ITEMS_PER_REQUEST = 500;
 let validItemsProcessed = 0;
 
@@ -106,13 +106,13 @@ const getCachedData = (key) => {
 
   try {
     const { data, timestamp } = JSON.parse(cached);
-    if (Date.now() - timestamp > CACHE_DURATION) {
-      if (key === CIVILIZATIONS_CACHE_KEY) {
-        localStorage.removeItem(OFFSET_CACHE_KEY);
-      }
-      localStorage.removeItem(key);
-      return null;
-    }
+    // if (Date.now() - timestamp > CACHE_DURATION) {
+    //   if (key === CIVILIZATIONS_CACHE_KEY) {
+    //     localStorage.removeItem(OFFSET_CACHE_KEY);
+    //   }
+    //   localStorage.removeItem(key);
+    //   return null;
+    // }
     return data;
   } catch (e) {
     console.error('Error parsing cache:', e);
@@ -165,11 +165,16 @@ const resetOffsetCache = () => {
   localStorage.removeItem(OFFSET_CACHE_KEY);
 };
 
+const clearPartialCache = () => {
+  localStorage.removeItem('nms_partial_civilizations_cache');
+};
+
 const filterValidData = (data) => {
   return data.filter(item =>
     item.title.civilizeD &&
     item.title.civilizeD !== 'Uncharted' &&
     item.title.coordinateS &&
+    item.title.galaxY &&
     item.title.pageName
   );
 };
@@ -207,9 +212,7 @@ const fetchAllCivilizationsAndRegions = async () => {
       hideProgressBar();
       return cached;
     }
-
     console.log('Fetching fresh civilizations data with pagination');
-
     let allData = [];
     let offset = getCachedOffset();
     let hasMore = true;
@@ -217,13 +220,17 @@ const fetchAllCivilizationsAndRegions = async () => {
     const maxRequestsPerSession = Infinity;
     const minValidDataThreshold = 50;
     const startTime = Date.now();
-
     console.log(`Starting from cached offset: ${offset}`);
+
+    const partialCached = getCachedData('nms_partial_civilizations_cache');
+    if (partialCached) {
+      allData = partialCached.data || [];
+      offset = partialCached.offset || 0;
+      console.log(`Resuming from partial cache with ${allData.length} items and offset ${offset}`);
+    }
 
     while (hasMore && requestCount < maxRequestsPerSession) {
       try {
-        updateProgressBar(validItemsProcessed, ESTIMATED_TOTAL_ITEMS, startTime);
-
         const pageData = await fetchCivilizationsPage(offset);
         const validPageData = filterValidData(pageData);
         validItemsProcessed += validPageData.length;
@@ -236,23 +243,23 @@ const fetchAllCivilizationsAndRegions = async () => {
           allData = allData.concat(validPageData);
           requestCount++;
 
-          console.log(`Total valid items so far: ${allData.length}`);
+          const partialCacheData = {
+            data: allData,
+            offset: offset + 500,
+            timestamp: Date.now()
+          };
+          setCachedData('nms_partial_civilizations_cache', partialCacheData);
 
-          if (pageData.length < 500) {
+          console.log(`Total valid items so far: ${allData.length}`);
+          if (pageData.length < 50) {
             hasMore = false;
-            console.log('Last page reached (less than 500 raw items)');
-          }
-          else if (validPageData.length < minValidDataThreshold) {
-            console.log(`Low valid data count (${validPageData.length}), but continuing to next page`);
+            console.log('Last page reached (less than 50 raw items)');
+          } else {
             offset += 500;
-            setCachedOffset(offset);
-          }
-          else {
-            offset += 500;
+            updateProgressBar(offset, ESTIMATED_TOTAL_ITEMS, startTime);
             setCachedOffset(offset);
             console.log(`Next offset saved to cache: ${offset}`);
           }
-
           if (hasMore) {
             console.log('Waiting before next request...');
             await new Promise(resolve => setTimeout(resolve, MIN_REQUEST_INTERVAL));
@@ -266,39 +273,46 @@ const fetchAllCivilizationsAndRegions = async () => {
     }
 
     console.log(`Total valid items fetched: ${allData.length}`);
-
     if (!hasMore) {
       resetOffsetCache();
+      localStorage.removeItem('nms_partial_civilizations_cache');
       updateProgressBar(ESTIMATED_TOTAL_ITEMS, ESTIMATED_TOTAL_ITEMS, startTime);
       console.log('All data fetched, offset cache reset');
       setTimeout(hideProgressBar, 1500);
     }
 
     if (allData.length > 0) {
-      const civilizations = [...new Set(
-        allData.map(item => item.title.civilizeD)
-      )].sort();
-
-      const regions = {};
-      civilizations.forEach(civ => {
-        regions[civ] = allData
-          .filter(item => item.title.civilizeD === civ)
-          .map(item => ({
-            name: item.title.pageName,
-            coordinates: item.title.coordinateS,
-          }))
-          .sort((a, b) => a.name.localeCompare(b.name));
+      const galaxies = [...new Set(
+        allData.map(item => item.title.galaxY)
+      )].filter(Boolean).sort();
+      const data = {};
+      galaxies.forEach(galaxy => {
+        data[galaxy] = {
+          civilizations: [],
+          regions: {}
+        };
+        const galaxyData = allData.filter(item => item.title.galaxY === galaxy);
+        const civilizations = [...new Set(
+          galaxyData.map(item => item.title.civilizeD)
+        )].sort();
+        data[galaxy].civilizations = civilizations;
+        civilizations.forEach(civ => {
+          data[galaxy].regions[civ] = galaxyData
+            .filter(item => item.title.civilizeD === civ)
+            .map(item => ({
+              name: item.title.pageName,
+              coordinates: item.title.coordinateS,
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+        });
       });
-
-      const result = { civilizations, regions };
-
+      const result = { galaxies, data };
       if (!hasMore) {
         setCachedData(CIVILIZATIONS_CACHE_KEY, result);
         console.log('Civilizations data cached successfully');
       } else {
         console.log('Data not cached yet - more pages to fetch');
       }
-
       return result;
     } else {
       hideProgressBar();
@@ -485,6 +499,7 @@ const showNotification = (message, type) => {
 
 const forceRefreshCivilizations = async () => {
   resetOffsetCache();
+  clearPartialCache();
   localStorage.removeItem(CIVILIZATIONS_CACHE_KEY);
   console.log('Cache cleared, forcing full refresh');
   return await fetchAllCivilizationsAndRegions();
@@ -492,28 +507,32 @@ const forceRefreshCivilizations = async () => {
 
 window.forceRefreshCivilizations = forceRefreshCivilizations;
 
-const populateCivilizationSelect = async () => {
-  const select = document.getElementById("civilizationSelect");
+const populateGalaxySelect = async () => {
+  const select = document.getElementById("galaxySelect");
   const loadingOption = document.createElement("option");
   loadingOption.value = "";
-  loadingOption.textContent = i18next.t("loadingCivilizations");
+  loadingOption.textContent = i18next.t("loadingGalaxies");
   loadingOption.disabled = true;
   select.innerHTML = "";
   select.appendChild(loadingOption);
+
   try {
-    const { civilizations } = await fetchAllCivilizationsAndRegions();
+    const { galaxies } = await fetchAllCivilizationsAndRegions();
     select.innerHTML = "";
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
-    defaultOption.textContent = i18next.t("selectCivilization");
+    defaultOption.textContent = i18next.t("selectGalaxy");
     select.appendChild(defaultOption);
-    civilizations.forEach(civ => {
+
+    galaxies.forEach(galaxy => {
       const option = document.createElement("option");
-      option.value = civ;
-      option.textContent = civ;
+      option.value = galaxy;
+      option.textContent = galaxy;
       select.appendChild(option);
     });
+
     select.disabled = false;
+    initializeChoices();
   } catch (error) {
     const errorOption = document.createElement("option");
     errorOption.value = "";
@@ -524,16 +543,74 @@ const populateCivilizationSelect = async () => {
   }
 };
 
-const populateRegionSelect = async (civilization) => {
-  const select = document.getElementById("regionSelect");
-  const regionInput = document.getElementById("regionInput");
+const populateCivilizationSelect = async (galaxy) => {
+  const select = document.getElementById("civilizationSelect");
 
-  if (!civilization) {
+  if (!galaxy) {
     select.innerHTML = "";
     select.disabled = true;
     const defaultOption = document.createElement("option");
     defaultOption.value = "";
-    defaultOption.textContent = i18next.t("selectCivilizationFirst");
+    defaultOption.textContent = i18next.t("selectGalaxyFirst");
+    select.appendChild(defaultOption);
+
+    const regionSelect = document.getElementById("regionSelect");
+    regionSelect.innerHTML = "";
+    regionSelect.disabled = true;
+    const regionOption = document.createElement("option");
+    regionOption.value = "";
+    regionOption.textContent = i18next.t("selectGalaxyFirst");
+    regionSelect.appendChild(regionOption);
+    return;
+  }
+
+  const loadingOption = document.createElement("option");
+  loadingOption.value = "";
+  loadingOption.textContent = i18next.t("loadingCivilizations");
+  loadingOption.disabled = true;
+  select.innerHTML = "";
+  select.appendChild(loadingOption);
+
+  try {
+    const cached = getCachedData(CIVILIZATIONS_CACHE_KEY);
+    if (cached && cached.data[galaxy]) {
+      const civilizations = cached.data[galaxy].civilizations;
+      select.innerHTML = "";
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = i18next.t("selectCivilization");
+      select.appendChild(defaultOption);
+
+      civilizations.forEach(civ => {
+        const option = document.createElement("option");
+        option.value = civ;
+        option.textContent = civ;
+        select.appendChild(option);
+      });
+
+      select.disabled = false;
+      initializeChoices();
+    }
+  } catch (error) {
+    const errorOption = document.createElement("option");
+    errorOption.value = "";
+    errorOption.textContent = i18next.t("loadError");
+    select.innerHTML = "";
+    select.appendChild(errorOption);
+    select.disabled = true;
+  }
+};
+
+const populateRegionSelect = async (galaxy, civilization) => {
+  const select = document.getElementById("regionSelect");
+  const regionInput = document.getElementById("regionInput");
+
+  if (!galaxy || !civilization) {
+    select.innerHTML = "";
+    select.disabled = true;
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = !galaxy ? i18next.t("selectGalaxyFirst") : i18next.t("selectCivilizationFirst");
     select.appendChild(defaultOption);
     return;
   }
@@ -548,52 +625,8 @@ const populateRegionSelect = async (civilization) => {
 
   try {
     const cached = getCachedData(CIVILIZATIONS_CACHE_KEY);
-    if (cached && cached.regions[civilization]) {
-      const regionsForCiv = cached.regions[civilization];
-      select.innerHTML = "";
-      const defaultOption = document.createElement("option");
-      defaultOption.value = "";
-      defaultOption.textContent = i18next.t("selectRegion");
-      select.appendChild(defaultOption);
-
-      regionsForCiv.forEach(region => {
-        const option = document.createElement("option");
-        option.value = region.coordinates || "";
-        option.textContent = region.name;
-        option.dataset.coordinates = region.coordinates || "";
-        select.appendChild(option);
-      });
-
-      if (regionsForCiv.length === 0) {
-        const noRegionsOption = document.createElement("option");
-        noRegionsOption.value = "";
-        noRegionsOption.textContent = i18next.t("noRegionsFound");
-        noRegionsOption.disabled = true;
-        select.appendChild(noRegionsOption);
-      }
-    } else {
-      const params = new URLSearchParams();
-      params.append('action', 'cargoquery');
-      params.append('tables', 'Regions');
-      params.append('fields', 'Regions.Civilized=civilizeD,Regions.Coordinates=coordinateS,_pageName=pageName');
-      params.append('where', `Civilized="${civilization}"`);
-      params.append('limit', '500');
-      params.append('format', 'json');
-      params.append('origin', '*');
-
-      const url = `${apiPath}?${params.toString()}`;
-      const response = await fetch(url);
-
-      if (!response.ok) {
-        throw new Error(`Failed to fetch regions for ${civilization}`);
-      }
-
-      const data = await response.json();
-      const regionsForCiv = (data.cargoquery || []).map(item => ({
-        name: item.title.pageName,
-        coordinates: item.title.coordinateS,
-      })).sort((a, b) => a.name.localeCompare(b.name));
-
+    if (cached && cached.data[galaxy] && cached.data[galaxy].regions[civilization]) {
+      const regionsForCiv = cached.data[galaxy].regions[civilization];
       select.innerHTML = "";
       const defaultOption = document.createElement("option");
       defaultOption.value = "";
@@ -617,6 +650,7 @@ const populateRegionSelect = async (civilization) => {
       }
     }
     select.disabled = false;
+    initializeChoices();
   } catch (error) {
     const errorOption = document.createElement("option");
     errorOption.value = "";
@@ -627,13 +661,16 @@ const populateRegionSelect = async (civilization) => {
   }
 };
 
-const resetOffset = () => {
-  localStorage.removeItem(OFFSET_CACHE_KEY);
+const onGalaxyChange = (select) => {
+  const galaxy = select.value;
+  populateCivilizationSelect(galaxy);
+  document.getElementById("regionInput").value = "";
 };
 
 const onCivilizationChange = (select) => {
+  const galaxy = document.getElementById("galaxySelect").value;
   const civilization = select.value;
-  populateRegionSelect(civilization);
+  populateRegionSelect(galaxy, civilization);
   document.getElementById("regionInput").value = "";
 };
 
@@ -648,11 +685,12 @@ const onRegionChange = (select) => {
 };
 
 const initializeRegionSelection = async () => {
-  await populateCivilizationSelect();
+  await populateGalaxySelect();
 };
 
 window.displayRandomGlyphs = displayRandomGlyphs;
 window.copyToClipboard = copyToClipboard;
+window.onGalaxyChange = onGalaxyChange;
 window.onCivilizationChange = onCivilizationChange;
 window.onRegionChange = onRegionChange;
 
@@ -673,7 +711,6 @@ const populateLanguageOptions = () => {
   });
 };
 
-// Function to change language
 window.changeLanguage = () => {
   const lang = document.getElementById("lang").value;
   i18next.changeLanguage(lang);
@@ -699,15 +736,19 @@ i18next.init(
           copiedFail: "Error copying the code.",
           glyphinput: "Enter glyphs (12): Optional",
           fullportalcode: "You need to insert the full portal code!",
+          selectGalaxy: "Select Galaxy",
           selectCivilization: "Select Civilization",
           selectRegion: "Select Region",
+          loadingGalaxies: "Loading galaxies...",
           loadingCivilizations: "Loading civilizations...",
           loadingRegions: "Loading regions...",
+          selectGalaxyFirst: "Select a galaxy first",
           selectCivilizationFirst: "Select a civilization first",
           noRegionsFound: "No regions found",
           loadError: "Error loading data",
           fetchError: "Error fetching data",
           regionSelection: "Region Selection",
+          galaxy: "Galaxy",
           civilization: "Civilization",
           region: "Region",
           loadingData: "Loading data...",
@@ -727,15 +768,19 @@ i18next.init(
           copiedFail: "Error al copiar el código.",
           glyphinput: "Introduce glifos (12): Opcional",
           fullportalcode: "¡Es necesario insertar el código completo del portal!",
+          selectGalaxy: "Seleccionar Galaxia",
           selectCivilization: "Seleccionar Civilización",
           selectRegion: "Seleccionar Región",
+          loadingGalaxies: "Cargando galaxias...",
           loadingCivilizations: "Cargando civilizaciones...",
           loadingRegions: "Cargando regiones...",
+          selectGalaxyFirst: "Selecciona una galaxia primero",
           selectCivilizationFirst: "Selecciona una civilización primero",
           noRegionsFound: "No se encontraron regiones",
           loadError: "Error cargando datos",
           fetchError: "Error obteniendo datos",
           regionSelection: "Selección de Región",
+          galaxy: "Galaxia",
           civilization: "Civilización",
           region: "Región",
           loadingData: "Cargando datos...",
@@ -783,15 +828,19 @@ i18next.init(
           copiedFail: "Fehler beim Kopieren des Codes.",
           glyphinput: "Glyphs eingeben (12): Optional",
           fullportalcode: "Sie müssen den vollständigen Portalcode eingeben!",
+          selectGalaxy: "Galaxie auswählen",
           selectCivilization: "Zivilisation auswählen",
           selectRegion: "Region auswählen",
+          loadingGalaxies: "Lade Galaxien...",
           loadingCivilizations: "Lade Zivilisationen...",
           loadingRegions: "Lade Regionen...",
+          selectGalaxyFirst: "Wählen Sie zuerst eine Galaxie",
           selectCivilizationFirst: "Wählen Sie zuerst eine Zivilisation",
           noRegionsFound: "Keine Regionen gefunden",
           loadError: "Fehler beim Laden der Daten",
           fetchError: "Fehler beim Abrufen der Daten",
           regionSelection: "Regionenauswahl",
+          galaxy: "Galaxie",
           civilization: "Zivilisation",
           region: "Region",
           loadingData: "Daten werden geladen...",
@@ -811,15 +860,19 @@ i18next.init(
           copiedFail: "Errorea kodea kopiatzerakoan.",
           glyphinput: "Sartu glifoak (12): Aukerakoa",
           fullportalcode: "Atariaren kode osoa sartu behar duzu!",
+          selectGalaxy: "Hautatu Galaxia",
           selectCivilization: "Hautatu Zibilizazioa",
           selectRegion: "Hautatu Eskualdea",
+          loadingGalaxies: "Galaxiak kargatzen...",
           loadingCivilizations: "Zibilizazioak kargatzen...",
           loadingRegions: "Eskualdeak kargatzen...",
+          selectGalaxyFirst: "Hautatu galaxia bat lehenik",
           selectCivilizationFirst: "Hautatu zibilizazio bat lehenik",
           noRegionsFound: "Ez da eskualderik aurkitu",
           loadError: "Errorea datuak kargatzean",
           fetchError: "Errorea datuak eskuratzean",
           regionSelection: "Eskualde Hautaketa",
+          galaxy: "Galaxia",
           civilization: "Zibilizazioa",
           region: "Eskualdea",
           loadingData: "Datuak kargatzen...",
@@ -853,3 +906,46 @@ document.addEventListener("DOMContentLoaded", () => {
   copyButton.disabled = true;
   glyphOutputContainer.classList.remove("show");
 });
+
+function initializeChoices() {
+  const galaxySelect = document.getElementById('galaxySelect');
+  const civilizationSelect = document.getElementById('civilizationSelect');
+  const regionSelect = document.getElementById('regionSelect');
+
+  if (galaxySelect.choicesInstance) {
+    galaxySelect.choicesInstance.destroy();
+  }
+  if (civilizationSelect.choicesInstance) {
+    civilizationSelect.choicesInstance.destroy();
+  }
+  if (regionSelect.choicesInstance) {
+    regionSelect.choicesInstance.destroy();
+  }
+
+  if (galaxySelect && !galaxySelect.disabled) {
+    galaxySelect.choicesInstance = new Choices(galaxySelect, {
+      searchEnabled: true,
+      searchPlaceholderValue: 'Buscar galaxia...',
+      itemSelectText: '',
+      shouldSort: false,
+    });
+  }
+
+  if (civilizationSelect && !civilizationSelect.disabled) {
+    civilizationSelect.choicesInstance = new Choices(civilizationSelect, {
+      searchEnabled: true,
+      searchPlaceholderValue: 'Buscar civilización...',
+      itemSelectText: '',
+      shouldSort: false,
+    });
+  }
+
+  if (regionSelect && !regionSelect.disabled) {
+    regionSelect.choicesInstance = new Choices(regionSelect, {
+      searchEnabled: true,
+      searchPlaceholderValue: 'Buscar región...',
+      itemSelectText: '',
+      shouldSort: false,
+    });
+  }
+}
