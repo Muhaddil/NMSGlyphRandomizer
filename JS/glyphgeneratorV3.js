@@ -1,5 +1,312 @@
 const validPortalKeys = '0123456789ABCDEF';
 
+const wikiLink = 'https://nomanssky.fandom.com/wiki/';
+const apiPath = 'https://nomanssky.fandom.com/api.php';
+
+const CIVILIZATIONS_CACHE_KEY = 'nms_civilizations_cache';
+const REGIONS_CACHE_KEY = 'nms_regions_cache';
+const OFFSET_CACHE_KEY = 'nms_offset_cache';
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+const requestQueue = [];
+let isProcessing = false;
+let lastRequestTime = 0;
+const MIN_REQUEST_INTERVAL = 30000;
+
+const ESTIMATED_TOTAL_ITEMS = 7000;
+const ITEMS_PER_REQUEST = 500;
+let validItemsProcessed = 0;
+
+const updateProgressBar = (current, total, startTime) => {
+  const progressContainer = document.getElementById('progressBarContainer');
+  const progressFill = document.getElementById('progressBarFill');
+  const progressPercentage = document.getElementById('progressPercentage');
+  const progressInfo = document.getElementById('progressInfo');
+  const timeEstimate = document.getElementById('timeEstimate');
+
+  if (!progressContainer || !progressFill) return;
+
+  progressContainer.style.display = 'block';
+
+  const percentage = Math.min(Math.round((current / total) * 100), 100);
+  progressFill.style.width = `${percentage}%`;
+  progressPercentage.textContent = `${percentage}%`;
+  progressInfo.textContent = `${current.toLocaleString()} / ${total.toLocaleString()}`;
+
+  const elapsed = Date.now() - startTime;
+  const itemsProcessed = current;
+  const itemsRemaining = total - current;
+
+  if (itemsProcessed > 0 && itemsRemaining > 0) {
+    const avgTimePerItem = elapsed / itemsProcessed;
+    const estimatedTimeRemaining = (avgTimePerItem * itemsRemaining) / 1000;
+
+    const minutes = Math.floor(estimatedTimeRemaining / 60);
+    const seconds = Math.round(estimatedTimeRemaining % 60);
+
+    if (minutes > 0) {
+      timeEstimate.textContent = i18next.t('estimatedTime', { minutes, seconds });
+    } else {
+      timeEstimate.textContent = i18next.t('estimatedTimeSeconds', { seconds });
+    }
+  } else if (itemsRemaining === 0) {
+    timeEstimate.textContent = i18next.t('complete');
+  }
+};
+
+const hideProgressBar = () => {
+  const progressContainer = document.getElementById('progressBarContainer');
+  if (progressContainer) {
+    setTimeout(() => {
+      progressContainer.style.display = 'none';
+    }, 1000);
+  }
+};
+
+const processQueue = async () => {
+  if (isProcessing || requestQueue.length === 0) return;
+
+  isProcessing = true;
+
+  while (requestQueue.length > 0) {
+    const now = Date.now();
+    const timeSinceLastRequest = now - lastRequestTime;
+
+    if (timeSinceLastRequest < MIN_REQUEST_INTERVAL) {
+      await new Promise(resolve =>
+        setTimeout(resolve, MIN_REQUEST_INTERVAL - timeSinceLastRequest)
+      );
+    }
+
+    const { fn, resolve, reject } = requestQueue.shift();
+
+    try {
+      lastRequestTime = Date.now();
+      const result = await fn();
+      resolve(result);
+    } catch (error) {
+      console.error('Request failed:', error);
+      reject(error);
+    }
+  }
+
+  isProcessing = false;
+};
+
+const enqueueRequest = (fn) => {
+  return new Promise((resolve, reject) => {
+    requestQueue.push({ fn, resolve, reject });
+    processQueue();
+  });
+};
+
+const getCachedData = (key) => {
+  const cached = localStorage.getItem(key);
+  if (!cached) return null;
+
+  try {
+    const { data, timestamp } = JSON.parse(cached);
+    if (Date.now() - timestamp > CACHE_DURATION) {
+      if (key === CIVILIZATIONS_CACHE_KEY) {
+        localStorage.removeItem(OFFSET_CACHE_KEY);
+      }
+      localStorage.removeItem(key);
+      return null;
+    }
+    return data;
+  } catch (e) {
+    console.error('Error parsing cache:', e);
+    localStorage.removeItem(key);
+    if (key === CIVILIZATIONS_CACHE_KEY) {
+      localStorage.removeItem(OFFSET_CACHE_KEY);
+    }
+    return null;
+  }
+};
+
+const setCachedData = (key, data) => {
+  try {
+    const cacheData = {
+      data,
+      timestamp: Date.now()
+    };
+    localStorage.setItem(key, JSON.stringify(cacheData));
+  } catch (e) {
+    console.error('Error setting cache:', e);
+  }
+};
+
+const getCachedOffset = () => {
+  const cached = localStorage.getItem(OFFSET_CACHE_KEY);
+  if (!cached) return 0;
+
+  try {
+    const { offset, timestamp } = JSON.parse(cached);
+    return offset || 0;
+  } catch (e) {
+    console.error('Error parsing offset cache:', e);
+    return 0;
+  }
+};
+
+const setCachedOffset = (offset) => {
+  try {
+    const cacheData = {
+      offset,
+      timestamp: Date.now()
+    };
+    localStorage.setItem(OFFSET_CACHE_KEY, JSON.stringify(cacheData));
+  } catch (e) {
+    console.error('Error setting offset cache:', e);
+  }
+};
+
+const resetOffsetCache = () => {
+  localStorage.removeItem(OFFSET_CACHE_KEY);
+};
+
+const filterValidData = (data) => {
+  return data.filter(item =>
+    item.title.civilizeD &&
+    item.title.civilizeD !== 'Uncharted' &&
+    item.title.coordinateS &&
+    item.title.pageName
+  );
+};
+
+const fetchCivilizationsPage = async (offset = 0) => {
+  const params = new URLSearchParams();
+  params.append('action', 'cargoquery');
+  params.append('tables', 'Regions');
+  params.append('fields', 'Regions.Civilized=civilizeD,Regions.Galaxy=galaxY,Regions.Coordinates=coordinateS,_pageName=pageName');
+  params.append('group_by', '_pageName');
+  params.append('order_by', '_pageName');
+  params.append('limit', '500');
+  params.append('offset', offset.toString());
+  params.append('format', 'json');
+  params.append('origin', '*');
+
+  const url = `${apiPath}?${params.toString()}`;
+  console.log(url)
+  console.log(`Fetching page with offset: ${offset}`);
+
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.cargoquery || [];
+};
+
+const fetchAllCivilizationsAndRegions = async () => {
+  return enqueueRequest(async () => {
+    const cached = getCachedData(CIVILIZATIONS_CACHE_KEY);
+    if (cached) {
+      console.log('Using cached civilizations data');
+      hideProgressBar();
+      return cached;
+    }
+
+    console.log('Fetching fresh civilizations data with pagination');
+
+    let allData = [];
+    let offset = getCachedOffset();
+    let hasMore = true;
+    let requestCount = 0;
+    const maxRequestsPerSession = Infinity;
+    const minValidDataThreshold = 50;
+    const startTime = Date.now();
+
+    console.log(`Starting from cached offset: ${offset}`);
+
+    while (hasMore && requestCount < maxRequestsPerSession) {
+      try {
+        updateProgressBar(validItemsProcessed, ESTIMATED_TOTAL_ITEMS, startTime);
+
+        const pageData = await fetchCivilizationsPage(offset);
+        const validPageData = filterValidData(pageData);
+        validItemsProcessed += validPageData.length;
+        console.log(`Page ${requestCount + 1}: ${pageData.length} raw items, ${validPageData.length} valid items`);
+
+        if (pageData.length === 0) {
+          hasMore = false;
+          console.log('No more data available');
+        } else {
+          allData = allData.concat(validPageData);
+          requestCount++;
+
+          console.log(`Total valid items so far: ${allData.length}`);
+
+          if (pageData.length < 500) {
+            hasMore = false;
+            console.log('Last page reached (less than 500 raw items)');
+          }
+          else if (validPageData.length < minValidDataThreshold) {
+            console.log(`Low valid data count (${validPageData.length}), but continuing to next page`);
+            offset += 500;
+            setCachedOffset(offset);
+          }
+          else {
+            offset += 500;
+            setCachedOffset(offset);
+            console.log(`Next offset saved to cache: ${offset}`);
+          }
+
+          if (hasMore) {
+            console.log('Waiting before next request...');
+            await new Promise(resolve => setTimeout(resolve, MIN_REQUEST_INTERVAL));
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching page:', error);
+        console.log(`Stopping due to error. Current offset: ${offset}`);
+        hasMore = false;
+      }
+    }
+
+    console.log(`Total valid items fetched: ${allData.length}`);
+
+    if (!hasMore) {
+      resetOffsetCache();
+      updateProgressBar(ESTIMATED_TOTAL_ITEMS, ESTIMATED_TOTAL_ITEMS, startTime);
+      console.log('All data fetched, offset cache reset');
+      setTimeout(hideProgressBar, 1500);
+    }
+
+    if (allData.length > 0) {
+      const civilizations = [...new Set(
+        allData.map(item => item.title.civilizeD)
+      )].sort();
+
+      const regions = {};
+      civilizations.forEach(civ => {
+        regions[civ] = allData
+          .filter(item => item.title.civilizeD === civ)
+          .map(item => ({
+            name: item.title.pageName,
+            coordinates: item.title.coordinateS,
+          }))
+          .sort((a, b) => a.name.localeCompare(b.name));
+      });
+
+      const result = { civilizations, regions };
+
+      if (!hasMore) {
+        setCachedData(CIVILIZATIONS_CACHE_KEY, result);
+        console.log('Civilizations data cached successfully');
+      } else {
+        console.log('Data not cached yet - more pages to fetch');
+      }
+
+      return result;
+    } else {
+      hideProgressBar();
+      throw new Error('No valid data could be fetched');
+    }
+  });
+};
+
 function glyphInputOnChange(input) {
   let newValue = input.value.toUpperCase();
   input.value = validateGlyphInput(newValue);
@@ -123,6 +430,28 @@ const displayRandomGlyphs = () => {
   copyButton.dataset.clipboard = glyphs;
 };
 
+const coords2Glyphs = (coordinates) => {
+  const parts = coordinates.split(':');
+  if (parts.length !== 4) return '';
+  const [xStr, yStr, zStr] = parts;
+  const coords_x = parseInt(xStr, 16);
+  const coords_y = parseInt(yStr, 16);
+  const coords_z = parseInt(zStr, 16);
+  const system_idx = '000';
+  const X_Z_POS_SHIFT = 2049;
+  const X_Z_NEG_SHIFT = 2047;
+  const Y_POS_SHIFT = 129;
+  const Y_NEG_SHIFT = 127;
+  const x_glyph = coords_x <= 2046 ? coords_x + X_Z_POS_SHIFT : coords_x - X_Z_NEG_SHIFT;
+  const z_glyph = coords_z <= 2046 ? coords_z + X_Z_POS_SHIFT : coords_z - X_Z_NEG_SHIFT;
+  const y_glyph = coords_y <= 126 ? coords_y + Y_POS_SHIFT : coords_y - Y_NEG_SHIFT;
+  const xGlyphHex = x_glyph.toString(16).toUpperCase().padStart(3, '0');
+  const yGlyphHex = y_glyph.toString(16).toUpperCase().padStart(2, '0');
+  const zGlyphHex = z_glyph.toString(16).toUpperCase().padStart(3, '0');
+  const prefix = '0';
+  return prefix + system_idx + yGlyphHex + zGlyphHex + xGlyphHex;
+};
+
 const copyToClipboard = () => {
   const copyButton = document.getElementById("copyButton");
   const textToCopy = copyButton.dataset.clipboard;
@@ -154,11 +483,179 @@ const showNotification = (message, type) => {
   }, 3000);
 };
 
+const forceRefreshCivilizations = async () => {
+  resetOffsetCache();
+  localStorage.removeItem(CIVILIZATIONS_CACHE_KEY);
+  console.log('Cache cleared, forcing full refresh');
+  return await fetchAllCivilizationsAndRegions();
+};
+
+window.forceRefreshCivilizations = forceRefreshCivilizations;
+
+const populateCivilizationSelect = async () => {
+  const select = document.getElementById("civilizationSelect");
+  const loadingOption = document.createElement("option");
+  loadingOption.value = "";
+  loadingOption.textContent = i18next.t("loadingCivilizations");
+  loadingOption.disabled = true;
+  select.innerHTML = "";
+  select.appendChild(loadingOption);
+  try {
+    const { civilizations } = await fetchAllCivilizationsAndRegions();
+    select.innerHTML = "";
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = i18next.t("selectCivilization");
+    select.appendChild(defaultOption);
+    civilizations.forEach(civ => {
+      const option = document.createElement("option");
+      option.value = civ;
+      option.textContent = civ;
+      select.appendChild(option);
+    });
+    select.disabled = false;
+  } catch (error) {
+    const errorOption = document.createElement("option");
+    errorOption.value = "";
+    errorOption.textContent = i18next.t("loadError");
+    select.innerHTML = "";
+    select.appendChild(errorOption);
+    select.disabled = true;
+  }
+};
+
+const populateRegionSelect = async (civilization) => {
+  const select = document.getElementById("regionSelect");
+  const regionInput = document.getElementById("regionInput");
+
+  if (!civilization) {
+    select.innerHTML = "";
+    select.disabled = true;
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = i18next.t("selectCivilizationFirst");
+    select.appendChild(defaultOption);
+    return;
+  }
+
+  const loadingOption = document.createElement("option");
+  loadingOption.value = "";
+  loadingOption.textContent = i18next.t("loadingRegions");
+  loadingOption.disabled = true;
+  select.innerHTML = "";
+  select.appendChild(loadingOption);
+  select.disabled = false;
+
+  try {
+    const cached = getCachedData(CIVILIZATIONS_CACHE_KEY);
+    if (cached && cached.regions[civilization]) {
+      const regionsForCiv = cached.regions[civilization];
+      select.innerHTML = "";
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = i18next.t("selectRegion");
+      select.appendChild(defaultOption);
+
+      regionsForCiv.forEach(region => {
+        const option = document.createElement("option");
+        option.value = region.coordinates || "";
+        option.textContent = region.name;
+        option.dataset.coordinates = region.coordinates || "";
+        select.appendChild(option);
+      });
+
+      if (regionsForCiv.length === 0) {
+        const noRegionsOption = document.createElement("option");
+        noRegionsOption.value = "";
+        noRegionsOption.textContent = i18next.t("noRegionsFound");
+        noRegionsOption.disabled = true;
+        select.appendChild(noRegionsOption);
+      }
+    } else {
+      const params = new URLSearchParams();
+      params.append('action', 'cargoquery');
+      params.append('tables', 'Regions');
+      params.append('fields', 'Regions.Civilized=civilizeD,Regions.Coordinates=coordinateS,_pageName=pageName');
+      params.append('where', `Civilized="${civilization}"`);
+      params.append('limit', '500');
+      params.append('format', 'json');
+      params.append('origin', '*');
+
+      const url = `${apiPath}?${params.toString()}`;
+      const response = await fetch(url);
+
+      if (!response.ok) {
+        throw new Error(`Failed to fetch regions for ${civilization}`);
+      }
+
+      const data = await response.json();
+      const regionsForCiv = (data.cargoquery || []).map(item => ({
+        name: item.title.pageName,
+        coordinates: item.title.coordinateS,
+      })).sort((a, b) => a.name.localeCompare(b.name));
+
+      select.innerHTML = "";
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = i18next.t("selectRegion");
+      select.appendChild(defaultOption);
+
+      regionsForCiv.forEach(region => {
+        const option = document.createElement("option");
+        option.value = region.coordinates || "";
+        option.textContent = region.name;
+        option.dataset.coordinates = region.coordinates || "";
+        select.appendChild(option);
+      });
+
+      if (regionsForCiv.length === 0) {
+        const noRegionsOption = document.createElement("option");
+        noRegionsOption.value = "";
+        noRegionsOption.textContent = i18next.t("noRegionsFound");
+        noRegionsOption.disabled = true;
+        select.appendChild(noRegionsOption);
+      }
+    }
+    select.disabled = false;
+  } catch (error) {
+    const errorOption = document.createElement("option");
+    errorOption.value = "";
+    errorOption.textContent = i18next.t("loadError");
+    select.innerHTML = "";
+    select.appendChild(errorOption);
+    select.disabled = true;
+  }
+};
+
+const resetOffset = () => {
+  localStorage.removeItem(OFFSET_CACHE_KEY);
+};
+
+const onCivilizationChange = (select) => {
+  const civilization = select.value;
+  populateRegionSelect(civilization);
+  document.getElementById("regionInput").value = "";
+};
+
+const onRegionChange = (select) => {
+  const coordinates = select.value;
+  if (coordinates) {
+    const glyphs = coords2Glyphs(coordinates);
+    document.getElementById("regionInput").value = glyphs;
+  } else {
+    document.getElementById("regionInput").value = "";
+  }
+};
+
+const initializeRegionSelection = async () => {
+  await populateCivilizationSelect();
+};
+
 window.displayRandomGlyphs = displayRandomGlyphs;
 window.copyToClipboard = copyToClipboard;
-window.displayRandomGlyphs = displayRandomGlyphs;
+window.onCivilizationChange = onCivilizationChange;
+window.onRegionChange = onRegionChange;
 
-// Function to populate the language options
 const populateLanguageOptions = () => {
   const select = document.getElementById("lang");
   const languageNames = {
@@ -184,13 +681,12 @@ window.changeLanguage = () => {
   $("body").localize();
 };
 
-// Initialize i18next
 i18next.init(
   {
     lng:
       localStorage.getItem("i18nextLng") ||
       navigator.language.split("-")[0] ||
-      "en", // Language fallback to browser language
+      "en",
     resources: {
       en: {
         translation: {
@@ -203,6 +699,21 @@ i18next.init(
           copiedFail: "Error copying the code.",
           glyphinput: "Enter glyphs (12): Optional",
           fullportalcode: "You need to insert the full portal code!",
+          selectCivilization: "Select Civilization",
+          selectRegion: "Select Region",
+          loadingCivilizations: "Loading civilizations...",
+          loadingRegions: "Loading regions...",
+          selectCivilizationFirst: "Select a civilization first",
+          noRegionsFound: "No regions found",
+          loadError: "Error loading data",
+          fetchError: "Error fetching data",
+          regionSelection: "Region Selection",
+          civilization: "Civilization",
+          region: "Region",
+          loadingData: "Loading data...",
+          estimatedTime: "~{{minutes}}m {{seconds}}s remaining",
+          estimatedTimeSeconds: "~{{seconds}}s remaining",
+          complete: "Complete!"
         },
       },
       es: {
@@ -216,6 +727,21 @@ i18next.init(
           copiedFail: "Error al copiar el código.",
           glyphinput: "Introduce glifos (12): Opcional",
           fullportalcode: "¡Es necesario insertar el código completo del portal!",
+          selectCivilization: "Seleccionar Civilización",
+          selectRegion: "Seleccionar Región",
+          loadingCivilizations: "Cargando civilizaciones...",
+          loadingRegions: "Cargando regiones...",
+          selectCivilizationFirst: "Selecciona una civilización primero",
+          noRegionsFound: "No se encontraron regiones",
+          loadError: "Error cargando datos",
+          fetchError: "Error obteniendo datos",
+          regionSelection: "Selección de Región",
+          civilization: "Civilización",
+          region: "Región",
+          loadingData: "Cargando datos...",
+          estimatedTime: "~{{minutes}}m {{seconds}}s restantes",
+          estimatedTimeSeconds: "~{{seconds}}s restantes",
+          complete: "¡Completado!"
         },
       },
       fr: {
@@ -229,6 +755,21 @@ i18next.init(
           copiedFail: "Erreur lors de la copie du code.",
           glyphinput: "Entrez les glyphes (12): Optionnel",
           fullportalcode: "Vous devez insérer le code complet du portail!",
+          selectCivilization: "Sélectionner la Civilisation",
+          selectRegion: "Sélectionner la Région",
+          loadingCivilizations: "Chargement des civilisations...",
+          loadingRegions: "Chargement des régions...",
+          selectCivilizationFirst: "Sélectionnez d'abord une civilisation",
+          noRegionsFound: "Aucune région trouvée",
+          loadError: "Erreur de chargement des données",
+          fetchError: "Erreur de récupération des données",
+          regionSelection: "Sélection de Région",
+          civilization: "Civilisation",
+          region: "Région",
+          loadingData: "Chargement des données...",
+          estimatedTime: "~{{minutes}}m {{seconds}}s restantes",
+          estimatedTimeSeconds: "~{{seconds}}s restantes",
+          complete: "Terminé!"
         },
       },
       de: {
@@ -242,6 +783,21 @@ i18next.init(
           copiedFail: "Fehler beim Kopieren des Codes.",
           glyphinput: "Glyphs eingeben (12): Optional",
           fullportalcode: "Sie müssen den vollständigen Portalcode eingeben!",
+          selectCivilization: "Zivilisation auswählen",
+          selectRegion: "Region auswählen",
+          loadingCivilizations: "Lade Zivilisationen...",
+          loadingRegions: "Lade Regionen...",
+          selectCivilizationFirst: "Wählen Sie zuerst eine Zivilisation",
+          noRegionsFound: "Keine Regionen gefunden",
+          loadError: "Fehler beim Laden der Daten",
+          fetchError: "Fehler beim Abrufen der Daten",
+          regionSelection: "Regionenauswahl",
+          civilization: "Zivilisation",
+          region: "Region",
+          loadingData: "Daten werden geladen...",
+          estimatedTime: "~{{minutes}}m {{seconds}}s verbleibend",
+          estimatedTimeSeconds: "~{{seconds}}s verbleibend",
+          complete: "Fertig!"
         },
       },
       eu: {
@@ -255,23 +811,36 @@ i18next.init(
           copiedFail: "Errorea kodea kopiatzerakoan.",
           glyphinput: "Sartu glifoak (12): Aukerakoa",
           fullportalcode: "Atariaren kode osoa sartu behar duzu!",
+          selectCivilization: "Hautatu Zibilizazioa",
+          selectRegion: "Hautatu Eskualdea",
+          loadingCivilizations: "Zibilizazioak kargatzen...",
+          loadingRegions: "Eskualdeak kargatzen...",
+          selectCivilizationFirst: "Hautatu zibilizazio bat lehenik",
+          noRegionsFound: "Ez da eskualderik aurkitu",
+          loadError: "Errorea datuak kargatzean",
+          fetchError: "Errorea datuak eskuratzean",
+          regionSelection: "Eskualde Hautaketa",
+          civilization: "Zibilizazioa",
+          region: "Eskualdea",
+          loadingData: "Datuak kargatzen...",
+          estimatedTime: "~{{minutes}}m {{seconds}}s geratzen",
+          estimatedTimeSeconds: "~{{seconds}}s geratzen",
+          complete: "Osatuta!"
         },
       },
     },
   },
   (err, t) => {
-    // Initialize the jquery-i18next library
     jqueryI18next.init(i18next, $);
-    // Translate the entire body
     $("body").localize();
 
-    // This autopopulates the language options in the select
     populateLanguageOptions();
 
-    // This selects the correct language option in the select
     const lang =
-      localStorage.getItem("i18nextLng") || i18next.language.split("-")[0]; // Get the selected language from localStorage or navigator.language
+      localStorage.getItem("i18nextLng") || i18next.language.split("-")[0];
     document.getElementById("lang").value = lang;
+
+    initializeRegionSelection();
   }
 );
 

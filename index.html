@@ -22,26 +22,57 @@
       Options will be populated by JavaScript
     </select>
   </div>
+    <div class="container">
+      <h1 data-i18n="header">Generador de Glifos NMS</h1>
 
-  <div class="container">
-    <h1 data-i18n="header">Generador de Glifos NMS</h1>
+      <div id="progressBarContainer" class="progress-bar-container" style="display: none;">
+        <div class="progress-bar-header">
+          <span data-i18n="loadingData">Loading data...</span>
+          <span id="progressPercentage">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div id="progressBarFill" class="progress-bar-fill"></div>
+        </div>
+        <div class="progress-bar-info">
+          <span id="progressInfo">0 / 0</span>
+          <span id="timeEstimate"></span>
+        </div>
+      </div>
 
-    <div class="input-group">
-      <label for="regionInput" data-i18n="glyphinput">Introduce glifos (12):</label>
-      <input type="text" id="regionInput" maxlength="12" oninput="glyphInputOnChange(this)" placeholder="Opcional">
+      <div class="region-selection">
+        <h3 data-i18n="regionSelection">Region Selection</h3>
+        <div class="region-group">
+          <div class="region-field">
+            <label for="civilizationSelect" data-i18n="civilization">Civilization</label>
+            <select id="civilizationSelect" onchange="onCivilizationChange(this)">
+              <option value="" data-i18n="loadingCivilizations">Loading civilizations...</option>
+            </select>
+          </div>
+          <div class="region-field">
+            <label for="regionSelect" data-i18n="region">Region</label>
+            <select id="regionSelect" onchange="onRegionChange(this)" disabled>
+              <option value="" data-i18n="selectCivilizationFirst">Select a civilization first</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="regionInput" data-i18n="glyphinput">Introduce glifos (12):</label>
+        <input type="text" id="regionInput" maxlength="12" oninput="glyphInputOnChange(this)" placeholder="Opcional">
+      </div>
+
+      <div class="button-group">
+        <button id="generateButton" class="primary" onclick="displayRandomGlyphs()" data-i18n="button">Generar
+          Glifos</button>
+        <button id="copyButton" onclick="copyToClipboard()" disabled data-i18n="copyButton">Copiar Código</button>
+      </div>
+
+      <div class="glyph-output" id="glyphOutputContainer">
+        <div id="glyphOutput" class="glyph-display"></div>
+        <div id="glyphOutputHex" class="glyph-hex"></div>
+      </div>
     </div>
-
-    <div class="button-group">
-      <button id="generateButton" class="primary" onclick="displayRandomGlyphs()" data-i18n="button">Generar
-        Glifos</button>
-      <button id="copyButton" onclick="copyToClipboard()" disabled data-i18n="copyButton">Copiar Código</button>
-    </div>
-
-    <div class="glyph-output" id="glyphOutputContainer">
-      <div id="glyphOutput" class="glyph-display"></div>
-      <div id="glyphOutputHex" class="glyph-hex"></div>
-    </div>
-  </div>
 </body>
 
 </html>
