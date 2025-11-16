@@ -1077,7 +1077,10 @@
       }
     },
     "Broomerrai": {
-      "civilizations": ["InExCor", "StarGazers Confederation"],
+      "civilizations": [
+        "InExCor",
+        "StarGazers Confederation"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2638,7 +2641,10 @@
       }
     },
     "Doshawchuc": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2807,7 +2813,10 @@
       }
     },
     "Drundemiso": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor",
+        "PanGalactic StarCabs"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14868,7 +14877,10 @@
       }
     },
     "Moglaschil": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -19101,7 +19113,10 @@
       }
     },
     "Yekathsebehn": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
