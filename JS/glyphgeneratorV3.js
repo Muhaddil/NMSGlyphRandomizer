@@ -519,68 +519,6 @@ const showNotification = (message, type) => {
   }, 3000);
 };
 
-function mergeCivilizationData(oldData, newData) {
-  const merged = JSON.parse(JSON.stringify(oldData));
-
-  for (const galaxy of newData.galaxies) {
-    if (!merged.galaxies.includes(galaxy)) {
-      merged.galaxies.push(galaxy);
-    }
-  }
-
-  for (const [galaxyName, galaxyInfo] of Object.entries(newData.data)) {
-    if (!merged.data[galaxyName]) {
-      merged.data[galaxyName] = galaxyInfo;
-      continue;
-    }
-
-    const oldGalaxy = merged.data[galaxyName];
-
-    for (const civ of galaxyInfo.civilizations) {
-      if (!oldGalaxy.civilizations.includes(civ)) {
-        oldGalaxy.civilizations.push(civ);
-      }
-    }
-
-    for (const civ of galaxyInfo.civilizations) {
-      if (!oldGalaxy.regions[civ]) {
-        oldGalaxy.regions[civ] = galaxyInfo.regions[civ];
-        continue;
-      }
-
-      const oldRegions = oldGalaxy.regions[civ];
-      const newRegions = galaxyInfo.regions[civ];
-
-      for (const r of newRegions) {
-        if (!oldRegions.some(or => or.name === r.name)) {
-          oldRegions.push(r);
-        }
-      }
-    }
-  }
-
-  return merged;
-}
-
-const forceRefreshCivilizations = async () => {
-  console.log("🔄 Forzando actualización y merge de datos…");
-  showNotification(i18next.t("updatingInfo"), "info");
-
-  const defaultData = await loadDefaultData();
-
-  const freshData = await fetchAllCivilizationsAndRegions(true);
-  const merged = mergeCivilizationData(defaultData, freshData);
-
-  setCachedData(CIVILIZATIONS_CACHE_KEY, merged);
-
-  console.log("✅ Merge completado. JSON actualizado sin borrar datos.");
-  showNotification(i18next.t("updatingFinish"), "success");
-
-  return merged;
-};
-
-window.forceRefreshCivilizations = forceRefreshCivilizations;
-
 const populateGalaxySelect = async () => {
   const select = document.getElementById("galaxySelect");
   const loadingOption = document.createElement("option");

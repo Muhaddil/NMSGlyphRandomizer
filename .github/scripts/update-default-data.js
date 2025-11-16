@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const apiPath = 'https://nomanssky.fandom.com/api.php';
-const MIN_REQUEST_INTERVAL = 35000; // 35 seconds between fetchs
+let MIN_REQUEST_INTERVAL = 35000; // default, it will be changed if the rate limit is modified
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -18,6 +18,29 @@ const filterValidData = (data) => {
     item.title.galaxY &&
     item.title.pageName
   );
+};
+
+const getRateLimit = async () => {
+  const url = `${apiPath}?action=query&meta=userinfo&uiprop=ratelimits&format=json&origin=*`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`HTTP error getting rate limit: ${res.status}`);
+  const data = await res.json();
+
+  const cargoLimits = data?.query?.userinfo?.ratelimits?.["cargo-query"];
+  if (!cargoLimits) return MIN_REQUEST_INTERVAL;
+
+  let maxInterval = 0;
+  for (const key in cargoLimits) {
+    const limit = cargoLimits[key]; // { hits, seconds }
+    if (limit.hits && limit.seconds) {
+      const interval = limit.seconds / limit.hits;
+      if (interval > maxInterval) maxInterval = interval;
+    }
+  }
+
+  const intervalMs = Math.ceil(maxInterval * 1000) + 5000;
+  console.log(`Cargo-query rate limits: ${JSON.stringify(cargoLimits)}, using interval ${intervalMs}ms`);
+  return intervalMs;
 };
 
 const fetchCivilizationsPage = async (offset = 0) => {
@@ -38,10 +61,7 @@ const fetchCivilizationsPage = async (offset = 0) => {
   console.log(`Fetching page with offset: ${offset}`);
 
   const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
+  if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
   const data = await response.json();
   return data.cargoquery || [];
 };
@@ -69,16 +89,13 @@ const fetchAllCivilizationsAndRegions = async () => {
 
         console.log(`Total valid items so far: ${allData.length}`);
         
-        if (pageData.length < 250) {
+        if (pageData.length < 500) {
           hasMore = false;
           console.log('Last page reached');
         } else {
           offset += 500;
-          
-          if (hasMore) {
-            console.log(`Waiting ${MIN_REQUEST_INTERVAL}ms before next request...`);
-            await sleep(MIN_REQUEST_INTERVAL);
-          }
+          console.log(`Waiting ${MIN_REQUEST_INTERVAL}ms before next request...`);
+          await sleep(MIN_REQUEST_INTERVAL);
         }
       }
     } catch (error) {
@@ -129,6 +146,8 @@ const fetchAllCivilizationsAndRegions = async () => {
 const main = async () => {
   try {
     console.log('=== Starting defaultData.json update ===');
+
+    MIN_REQUEST_INTERVAL = await getRateLimit();
     
     const result = await fetchAllCivilizationsAndRegions();
     
