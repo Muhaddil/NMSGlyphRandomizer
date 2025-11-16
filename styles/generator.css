@@ -283,6 +283,12 @@ button.primary:hover:not(:disabled) {
   border: 1px solid #ef4444;
 }
 
+.notification.info {
+  background: rgba(59, 130, 246, 0.9);
+  color: #ffffff;
+  border: 1px solid #3b82f6;
+}
+
 .notification.show {
   transform: translateX(0);
 }

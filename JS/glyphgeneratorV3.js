@@ -17,6 +17,25 @@ const ESTIMATED_TOTAL_ITEMS = 7500;
 const ITEMS_PER_REQUEST = 500;
 let validItemsProcessed = 0;
 
+const loadDefaultData = async () => {
+  try {
+    const response = await fetch("../public/assets/defaultData/defaultData.json");
+    if (!response.ok) throw new Error("Could not load defaultData.json");
+    const data = await response.json();
+
+    const existing = getCachedData(CIVILIZATIONS_CACHE_KEY);
+    if (!existing) {
+      console.log("Loading default data into the cache...");
+      setCachedData(CIVILIZATIONS_CACHE_KEY, data);
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error loading default data:", error);
+    return null;
+  }
+};
+
 const updateProgressBar = (current, total, startTime) => {
   const progressContainer = document.getElementById('progressBarContainer');
   const progressFill = document.getElementById('progressBarFill');
@@ -445,6 +464,7 @@ const displayRandomGlyphs = () => {
 };
 
 const coords2Glyphs = (coordinates) => {
+  if (!coordinates || typeof coordinates !== 'string') return '';
   const parts = coordinates.split(':');
   if (parts.length !== 4) return '';
   const [xStr, yStr, zStr] = parts;
@@ -497,12 +517,64 @@ const showNotification = (message, type) => {
   }, 3000);
 };
 
+function mergeCivilizationData(oldData, newData) {
+  const merged = JSON.parse(JSON.stringify(oldData));
+
+  for (const galaxy of newData.galaxies) {
+    if (!merged.galaxies.includes(galaxy)) {
+      merged.galaxies.push(galaxy);
+    }
+  }
+
+  for (const [galaxyName, galaxyInfo] of Object.entries(newData.data)) {
+    if (!merged.data[galaxyName]) {
+      merged.data[galaxyName] = galaxyInfo;
+      continue;
+    }
+
+    const oldGalaxy = merged.data[galaxyName];
+
+    for (const civ of galaxyInfo.civilizations) {
+      if (!oldGalaxy.civilizations.includes(civ)) {
+        oldGalaxy.civilizations.push(civ);
+      }
+    }
+
+    for (const civ of galaxyInfo.civilizations) {
+      if (!oldGalaxy.regions[civ]) {
+        oldGalaxy.regions[civ] = galaxyInfo.regions[civ];
+        continue;
+      }
+
+      const oldRegions = oldGalaxy.regions[civ];
+      const newRegions = galaxyInfo.regions[civ];
+
+      for (const r of newRegions) {
+        if (!oldRegions.some(or => or.name === r.name)) {
+          oldRegions.push(r);
+        }
+      }
+    }
+  }
+
+  return merged;
+}
+
 const forceRefreshCivilizations = async () => {
-  resetOffsetCache();
-  clearPartialCache();
-  localStorage.removeItem(CIVILIZATIONS_CACHE_KEY);
-  console.log('Cache cleared, forcing full refresh');
-  return await fetchAllCivilizationsAndRegions();
+  console.log("🔄 Forzando actualización y merge de datos…");
+  showNotification(i18next.t("updatingInfo"), "info");
+
+  const defaultData = await loadDefaultData();
+
+  const freshData = await fetchAllCivilizationsAndRegions(true);
+  const merged = mergeCivilizationData(defaultData, freshData);
+
+  setCachedData(CIVILIZATIONS_CACHE_KEY, merged);
+
+  console.log("✅ Merge completado. JSON actualizado sin borrar datos.");
+  showNotification(i18next.t("updatingFinish"), "success");
+
+  return merged;
 };
 
 window.forceRefreshCivilizations = forceRefreshCivilizations;
@@ -685,7 +757,13 @@ const onRegionChange = (select) => {
 };
 
 const initializeRegionSelection = async () => {
+  await loadDefaultData();
+
   await populateGalaxySelect();
+
+  fetchAllCivilizationsAndRegions()
+    .then(() => console.log("Data updated in the background"))
+    .catch(err => console.error("Error refreshing data:", err));
 };
 
 window.displayRandomGlyphs = displayRandomGlyphs;
@@ -754,7 +832,9 @@ i18next.init(
           loadingData: "Loading data...",
           estimatedTime: "~{{minutes}}m {{seconds}}s remaining",
           estimatedTimeSeconds: "~{{seconds}}s remaining",
-          complete: "Complete!"
+          complete: "Complete!",
+          updatingFinish: "The regions update is complete.",
+          updatingInfo: "The region update may take more than 5 minutes, please be patient."
         },
       },
       es: {
@@ -786,7 +866,9 @@ i18next.init(
           loadingData: "Cargando datos...",
           estimatedTime: "~{{minutes}}m {{seconds}}s restantes",
           estimatedTimeSeconds: "~{{seconds}}s restantes",
-          complete: "¡Completado!"
+          complete: "¡Completado!",
+          updatingFinish: "Se ha terminado de actualizar las regiones.",
+          updatingInfo: "La actualización de regiones puede tardar más de 5 minutos, sea paciente por favor."
         },
       },
       fr: {
@@ -814,7 +896,9 @@ i18next.init(
           loadingData: "Chargement des données...",
           estimatedTime: "~{{minutes}}m {{seconds}}s restantes",
           estimatedTimeSeconds: "~{{seconds}}s restantes",
-          complete: "Terminé!"
+          complete: "Terminé!",
+          updatingFinish: "La mise à jour des régions est terminée.",
+          updatingInfo: "La mise à jour de la région peut prendre plus de 5 minutes. Veuillez patienter."
         },
       },
       de: {
@@ -846,7 +930,9 @@ i18next.init(
           loadingData: "Daten werden geladen...",
           estimatedTime: "~{{minutes}}m {{seconds}}s verbleibend",
           estimatedTimeSeconds: "~{{seconds}}s verbleibend",
-          complete: "Fertig!"
+          complete: "Fertig!",
+          updatingFinish: "Die Aktualisierung der Regionen ist abgeschlossen.",
+          updatingInfo: "Die Aktualisierung der Region kann mehr als 5 Minuten dauern. Bitte haben Sie Geduld."
         },
       },
       eu: {
@@ -878,7 +964,9 @@ i18next.init(
           loadingData: "Datuak kargatzen...",
           estimatedTime: "~{{minutes}}m {{seconds}}s geratzen",
           estimatedTimeSeconds: "~{{seconds}}s geratzen",
-          complete: "Osatuta!"
+          complete: "Osatuta!",
+          updatingFinish: "Eskualdeak gaurkotzen amaitu da.",
+          updatingInfo: "Eskualdeak eguneratzeko 5 minutu baino gehiago behar dira, pazientzia izan mesedez."
         },
       },
     },
