@@ -1,0 +1,35 @@
+name: Update Default Data
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 3 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 'lts'
+          cache: 'npm'
+
+      - name: Fetch and update data
+        run: node .github/scripts/update-default-data.js
+        
+      - name: Commit and push if changed
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update defaultData.json [automated]"
+          file_pattern: public/assets/defaultData/defaultData.json
