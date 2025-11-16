@@ -260,7 +260,9 @@
   ],
   "data": {
     "Aaseertush": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -283,7 +285,9 @@
       }
     },
     "Aediabiel": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -306,7 +310,10 @@
       }
     },
     "Agnusopwit": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -335,7 +342,10 @@
       }
     },
     "Akbulkabi": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -541,7 +551,11 @@
       }
     },
     "Apmaneessu": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -763,7 +777,10 @@
       }
     },
     "Badesclema": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -823,7 +840,10 @@
       }
     },
     "Beiraghedwe": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -852,7 +872,9 @@
       }
     },
     "Bephembah": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -914,7 +936,9 @@
       }
     },
     "Bloytisagra": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -941,7 +965,9 @@
       }
     },
     "Boealalosnj": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -972,7 +998,10 @@
       }
     },
     "Boyaghosganh": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -1009,7 +1038,11 @@
       }
     },
     "Brogoweldian": {
-      "civilizations": ["Cafe 42", "InExCor", "UNITY"],
+      "civilizations": [
+        "Cafe 42",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "Cafe 42": [
           {
@@ -1044,7 +1077,9 @@
       }
     },
     "Broomerrai": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -1071,7 +1106,10 @@
       }
     },
     "Brotoghek": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -1373,7 +1411,10 @@
       }
     },
     "Cajaccari": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2018,7 +2059,10 @@
       }
     },
     "Chmageaki": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2051,7 +2095,10 @@
       }
     },
     "Cidoniana": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2088,7 +2135,10 @@
       }
     },
     "Coellosipp": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2117,7 +2167,9 @@
       }
     },
     "Corpinyaya": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2140,7 +2192,10 @@
       }
     },
     "Cugnatachh": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2169,7 +2224,9 @@
       }
     },
     "Cuzcogipper": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2188,7 +2245,9 @@
       }
     },
     "Daitibeli": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2211,7 +2270,11 @@
       }
     },
     "Daksanquix": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2246,7 +2309,9 @@
       }
     },
     "Daquaesc Conflux": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2257,7 +2322,9 @@
       }
     },
     "Davanossi": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2284,7 +2351,11 @@
       }
     },
     "Digarlewena": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2323,7 +2394,10 @@
       }
     },
     "Dihewsonj": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2352,7 +2426,10 @@
       }
     },
     "Dimonimba": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2381,7 +2458,10 @@
       }
     },
     "Dischiutun": {
-      "civilizations": ["Alliance of Galactic Travellers", "InExCor"],
+      "civilizations": [
+        "Alliance of Galactic Travellers",
+        "InExCor"
+      ],
       "regions": {
         "Alliance of Galactic Travellers": [
           {
@@ -2539,7 +2619,9 @@
       }
     },
     "Doshawchuc": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2562,7 +2644,9 @@
       }
     },
     "Dotusingg": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2632,7 +2716,9 @@
       }
     },
     "Drajayanes": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2663,7 +2749,11 @@
       }
     },
     "Drewweste": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2694,7 +2784,9 @@
       }
     },
     "Drundemiso": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2842,7 +2934,10 @@
       }
     },
     "Ebedeagurst": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2875,7 +2970,10 @@
       }
     },
     "Ebralduri": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -2904,7 +3002,10 @@
       }
     },
     "Ebyeloof": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -2941,7 +3042,10 @@
       }
     },
     "Ehbogdenbu": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -3858,7 +3962,9 @@
       }
     },
     "Ekdaluskin": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -3955,7 +4061,10 @@
       }
     },
     "Elkowaldb": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -4229,7 +4338,9 @@
       }
     },
     "Emarmatosi": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -4252,7 +4363,10 @@
       }
     },
     "Emiekereks": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -4285,7 +4399,9 @@
       }
     },
     "Enjaxusanto": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -4308,7 +4424,10 @@
       }
     },
     "Enlaythie": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -4333,7 +4452,10 @@
       }
     },
     "Erquagsta": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -4370,7 +4492,11 @@
       }
     },
     "Ethiophodhe": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -10728,7 +10854,9 @@
       }
     },
     "Evcickcandj": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -10794,7 +10922,9 @@
       }
     },
     "Ewheelonc": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -10817,7 +10947,11 @@
       }
     },
     "Ezdaranit": {
-      "civilizations": ["Ezdaranit Initiative", "GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "Ezdaranit Initiative",
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "Ezdaranit Initiative": [
           {
@@ -10856,7 +10990,10 @@
       }
     },
     "Ezdartlic": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -10885,7 +11022,11 @@
       }
     },
     "Fladiselm": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -10924,7 +11065,10 @@
       }
     },
     "Fontenikk": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -10961,7 +11105,9 @@
       }
     },
     "Gaiteseling": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -10980,7 +11126,9 @@
       }
     },
     "Gaybakuaria": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11007,7 +11155,9 @@
       }
     },
     "Getaizakaal": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11034,7 +11184,10 @@
       }
     },
     "Grbodubhe": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11067,7 +11220,10 @@
       }
     },
     "Gucuttarik": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11157,7 +11313,9 @@
       }
     },
     "Hakapanasy": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11184,7 +11342,10 @@
       }
     },
     "Halsebenk": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11213,7 +11374,9 @@
       }
     },
     "Hansolmien": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11236,7 +11399,9 @@
       }
     },
     "Hapirajua": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11302,7 +11467,9 @@
       }
     },
     "Henayliszm": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11321,7 +11488,10 @@
       }
     },
     "Heperclait": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -11991,7 +12161,9 @@
       }
     },
     "Hilfsesorbs": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12084,7 +12256,10 @@
       }
     },
     "Hiviusauer": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12113,7 +12288,11 @@
       }
     },
     "Homskiw": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -12152,7 +12331,10 @@
       }
     },
     "Horeroedsh": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -12189,7 +12371,9 @@
       }
     },
     "Huruahili": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12212,7 +12396,9 @@
       }
     },
     "Husalvangewi": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12480,7 +12666,9 @@
       }
     },
     "Iadoitesu": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12499,7 +12687,9 @@
       }
     },
     "Iaereznika": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12526,7 +12716,10 @@
       }
     },
     "Ialmendra": {
-      "civilizations": ["Alliance of Galactic Travellers", "InExCor"],
+      "civilizations": [
+        "Alliance of Galactic Travellers",
+        "InExCor"
+      ],
       "regions": {
         "Alliance of Galactic Travellers": [
           {
@@ -12555,7 +12748,9 @@
       }
     },
     "Ibtrevskip": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12701,7 +12896,9 @@
       }
     },
     "Igbinduina": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12724,7 +12921,10 @@
       }
     },
     "Ijsenufryos": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12749,7 +12949,9 @@
       }
     },
     "Ikbaksmit": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12772,7 +12974,10 @@
       }
     },
     "Ilkerloor": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12848,7 +13053,10 @@
       }
     },
     "Impoxectin": {
-      "civilizations": ["Galactica", "InExCor"],
+      "civilizations": [
+        "Galactica",
+        "InExCor"
+      ],
       "regions": {
         "Galactica": [
           {
@@ -12881,7 +13089,10 @@
       }
     },
     "Indjalala": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -12910,7 +13121,10 @@
       }
     },
     "Innebdjerah": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -12939,7 +13153,10 @@
       }
     },
     "Inunnunnoda": {
-      "civilizations": ["Alliance of Galactic Travellers", "InExCor"],
+      "civilizations": [
+        "Alliance of Galactic Travellers",
+        "InExCor"
+      ],
       "regions": {
         "Alliance of Galactic Travellers": [
           {
@@ -12968,7 +13185,10 @@
       }
     },
     "Iodhinxois": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -13083,7 +13303,9 @@
       }
     },
     "Irceauffey": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13106,7 +13328,9 @@
       }
     },
     "Irroswitzs": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13356,7 +13580,10 @@
       }
     },
     "Isenkeyan": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -13385,7 +13612,9 @@
       }
     },
     "Isgarmeso": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13408,7 +13637,11 @@
       }
     },
     "Itlhotagra": {
-      "civilizations": ["InExCor", "Kosforr Travellers Guild", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "Kosforr Travellers Guild",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13443,7 +13676,10 @@
       }
     },
     "Ityanianat": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13476,7 +13712,11 @@
       }
     },
     "Iwundaracos": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -13511,7 +13751,10 @@
       }
     },
     "Jasinessa": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13544,7 +13787,10 @@
       }
     },
     "Jelmandan": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13577,7 +13823,11 @@
       }
     },
     "Jewijkmas": {
-      "civilizations": ["InExCor", "The Interciv Assembly", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "The Interciv Assembly",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13771,7 +14021,10 @@
       }
     },
     "Kimycuristh": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -13800,7 +14053,11 @@
       }
     },
     "Kissonlin": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -13835,7 +14092,9 @@
       }
     },
     "Kisvarcini": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13866,7 +14125,10 @@
       }
     },
     "Kuolungau": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13903,7 +14165,9 @@
       }
     },
     "Laanawemb": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13930,7 +14194,10 @@
       }
     },
     "Ladgudiraf": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13959,7 +14226,9 @@
       }
     },
     "Ladsenlay": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -13986,7 +14255,9 @@
       }
     },
     "Leckandmeram": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14005,7 +14276,9 @@
       }
     },
     "Litzmantufa": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14028,7 +14301,10 @@
       }
     },
     "Logovoloin": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14131,7 +14407,10 @@
       }
     },
     "Loydporpen": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -14164,7 +14443,9 @@
       }
     },
     "Luleukous": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14195,7 +14476,11 @@
       }
     },
     "Lusontrygiamh": {
-      "civilizations": ["Cafe 42", "InExCor", "UNITY"],
+      "civilizations": [
+        "Cafe 42",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "Cafe 42": [
           {
@@ -14234,7 +14519,9 @@
       }
     },
     "Luyugoslasr": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14257,7 +14544,11 @@
       }
     },
     "Maupenzhay": {
-      "civilizations": ["Cafe 42", "InExCor", "UNITY"],
+      "civilizations": [
+        "Cafe 42",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "Cafe 42": [
           {
@@ -14292,7 +14583,11 @@
       }
     },
     "Meximicka": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau", "Oxalis"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau",
+        "Oxalis"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14331,7 +14626,9 @@
       }
     },
     "Meykinunukur": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14401,7 +14698,10 @@
       }
     },
     "Milekistri": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14430,7 +14730,9 @@
       }
     },
     "Moglaschil": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14453,7 +14755,10 @@
       }
     },
     "Mufimbomacvi": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -14565,7 +14870,10 @@
       }
     },
     "Mushonponte": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14745,7 +15053,10 @@
       }
     },
     "Neuxoisan": {
-      "civilizations": ["Alliance of Galactic Travellers", "InExCor"],
+      "civilizations": [
+        "Alliance of Galactic Travellers",
+        "InExCor"
+      ],
       "regions": {
         "Alliance of Galactic Travellers": [
           {
@@ -14774,7 +15085,10 @@
       }
     },
     "Nipikulha": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14799,7 +15113,9 @@
       }
     },
     "Noggalterpor": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14822,7 +15138,10 @@
       }
     },
     "Nokokipsechl": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -14890,7 +15209,9 @@
       }
     },
     "Nootanore": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14917,7 +15238,9 @@
       }
     },
     "Nozoryenki": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -14940,7 +15263,10 @@
       }
     },
     "Nudquathsenfe": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -14977,7 +15303,10 @@
       }
     },
     "Nupiacheh": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15006,7 +15335,9 @@
       }
     },
     "Nuponoparau": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15033,7 +15364,10 @@
       }
     },
     "Nuybeliaure": {
-      "civilizations": ["Alliance of Galactic Travellers", "InExCor"],
+      "civilizations": [
+        "Alliance of Galactic Travellers",
+        "InExCor"
+      ],
       "regions": {
         "Alliance of Galactic Travellers": [
           {
@@ -15249,7 +15583,11 @@
       }
     },
     "Odyavanta": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -15404,7 +15742,9 @@
       }
     },
     "Olonerovo": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15427,7 +15767,10 @@
       }
     },
     "Oniijialdu": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15568,7 +15911,9 @@
       }
     },
     "Ooibekuar": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15595,7 +15940,9 @@
       }
     },
     "Otimanaso": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15622,7 +15969,9 @@
       }
     },
     "Ovna'uesed": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15645,7 +15994,9 @@
       }
     },
     "Oyleyzhan": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15772,7 +16123,9 @@
       }
     },
     "Pamanhermonsu": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15795,7 +16148,9 @@
       }
     },
     "Pasycihelwhee": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15938,7 +16293,10 @@
       }
     },
     "Podalicess": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15967,7 +16325,9 @@
       }
     },
     "Puikitoac": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -15994,7 +16354,10 @@
       }
     },
     "Purneyrine": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16023,7 +16386,10 @@
       }
     },
     "Quulngais": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16056,7 +16422,10 @@
       }
     },
     "Raldwicarn": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -16089,7 +16458,10 @@
       }
     },
     "Reponudrle": {
-      "civilizations": ["Alliance of Galactic Travellers", "InExCor"],
+      "civilizations": [
+        "Alliance of Galactic Travellers",
+        "InExCor"
+      ],
       "regions": {
         "Alliance of Galactic Travellers": [
           {
@@ -16224,7 +16596,11 @@
       }
     },
     "Rewmanawa": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -16291,7 +16667,9 @@
       }
     },
     "Rinblodesa": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16318,7 +16696,10 @@
       }
     },
     "Rinjanagrbo": {
-      "civilizations": ["Alliance of Galactic Travellers", "InExCor"],
+      "civilizations": [
+        "Alliance of Galactic Travellers",
+        "InExCor"
+      ],
       "regions": {
         "Alliance of Galactic Travellers": [
           {
@@ -16347,7 +16728,10 @@
       }
     },
     "Rivskimbe": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16372,7 +16756,10 @@
       }
     },
     "Roansfien": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16405,7 +16792,9 @@
       }
     },
     "Roclaytonycar": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16432,7 +16821,9 @@
       }
     },
     "Ruckinarkh": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16455,7 +16846,11 @@
       }
     },
     "Rudrailhik": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -16490,7 +16885,10 @@
       }
     },
     "Rukwatsuku": {
-      "civilizations": ["Alliance of Galactic Travellers", "InExCor"],
+      "civilizations": [
+        "Alliance of Galactic Travellers",
+        "InExCor"
+      ],
       "regions": {
         "Alliance of Galactic Travellers": [
           {
@@ -16578,7 +16976,9 @@
       }
     },
     "Saffneckm": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16605,7 +17005,9 @@
       }
     },
     "Sahliacabru": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16628,7 +17030,9 @@
       }
     },
     "Sezviktorew": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16721,7 +17125,11 @@
       }
     },
     "Smoduraykl": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -16756,7 +17164,10 @@
       }
     },
     "Snatreetze": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16785,7 +17196,9 @@
       }
     },
     "Sthatigudi": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -16910,7 +17323,9 @@
       }
     },
     "Sugiuniam": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17041,7 +17456,9 @@
       }
     },
     "Telicianses": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17122,7 +17539,9 @@
       }
     },
     "Thnistner": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17145,7 +17564,10 @@
       }
     },
     "Thorettac": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -17174,7 +17596,9 @@
       }
     },
     "Torweierf": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17251,7 +17675,11 @@
       }
     },
     "Tuychelisaor": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17360,7 +17788,10 @@
       }
     },
     "Tweretnort": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17389,7 +17820,9 @@
       }
     },
     "Twoodmand": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17416,7 +17849,9 @@
       }
     },
     "Uagerosat": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17443,7 +17878,9 @@
       }
     },
     "Ubredhatk": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17474,7 +17911,9 @@
       }
     },
     "Uglyestemaa": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17548,7 +17987,9 @@
       }
     },
     "Ulexovitab": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17617,7 +18058,9 @@
       }
     },
     "Ulosaginyik": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17721,7 +18164,9 @@
       }
     },
     "Umlanswick": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17744,7 +18189,10 @@
       }
     },
     "Urastrykle": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17773,7 +18221,9 @@
       }
     },
     "Urckiansi": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17800,7 +18250,10 @@
       }
     },
     "Utzenmate": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -17872,7 +18325,10 @@
       }
     },
     "Veticueca": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17905,7 +18361,9 @@
       }
     },
     "Vittesbursul": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17928,7 +18386,9 @@
       }
     },
     "Waferganh": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -17951,7 +18411,10 @@
       }
     },
     "Wayndohalou": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18035,7 +18498,10 @@
       }
     },
     "Wiensanshe": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18068,7 +18534,9 @@
       }
     },
     "Wongquarum": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18149,7 +18617,10 @@
       }
     },
     "Wucetosucc": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18306,7 +18777,9 @@
       }
     },
     "Yaevarcko": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18387,7 +18860,10 @@
       }
     },
     "Yeberhahne": {
-      "civilizations": ["InExCor", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18483,7 +18959,9 @@
       }
     },
     "Yekathsebehn": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18510,7 +18988,10 @@
       }
     },
     "Yeonatlak": {
-      "civilizations": ["GenBra Space Corp", "InExCor"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -18539,7 +19020,9 @@
       }
     },
     "Yevettiiqidcon": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18562,7 +19045,10 @@
       }
     },
     "Yudukagath": {
-      "civilizations": ["InExCor", "Multiverse Expeditionary Corps"],
+      "civilizations": [
+        "InExCor",
+        "Multiverse Expeditionary Corps"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18645,7 +19131,11 @@
       }
     },
     "Zalienkosm": {
-      "civilizations": ["GenBra Space Corp", "InExCor", "UNITY"],
+      "civilizations": [
+        "GenBra Space Corp",
+        "InExCor",
+        "UNITY"
+      ],
       "regions": {
         "GenBra Space Corp": [
           {
@@ -18849,7 +19339,9 @@
       }
     },
     "Zikehpm": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18876,7 +19368,9 @@
       }
     },
     "Ziybosswin": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18899,7 +19393,9 @@
       }
     },
     "Zosakasiro": {
-      "civilizations": ["InExCor"],
+      "civilizations": [
+        "InExCor"
+      ],
       "regions": {
         "InExCor": [
           {
@@ -18922,7 +19418,11 @@
       }
     },
     "Zukasizawa": {
-      "civilizations": ["InExCor", "Morley Celestial Bureau", "UNITY"],
+      "civilizations": [
+        "InExCor",
+        "Morley Celestial Bureau",
+        "UNITY"
+      ],
       "regions": {
         "InExCor": [
           {
