@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -31,6 +31,8 @@ const fetchCivilizationsPage = async (offset = 0) => {
   params.append('offset', offset.toString());
   params.append('format', 'json');
   params.append('origin', '*');
+
+  params.append('where', 'Civilized IS NOT NULL AND Civilized <> "Uncharted" AND Coordinates IS NOT NULL AND Galaxy IS NOT NULL');
 
   const url = `${apiPath}?${params.toString()}`;
   console.log(`Fetching page with offset: ${offset}`);
@@ -67,7 +69,7 @@ const fetchAllCivilizationsAndRegions = async () => {
 
         console.log(`Total valid items so far: ${allData.length}`);
         
-        if (pageData.length < 50) {
+        if (pageData.length < 250) {
           hasMore = false;
           console.log('Last page reached');
         } else {

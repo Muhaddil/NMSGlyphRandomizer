@@ -1077,9 +1077,7 @@
       }
     },
     "Broomerrai": {
-      "civilizations": [
-        "InExCor"
-      ],
+      "civilizations": ["InExCor", "StarGazers Confederation"],
       "regions": {
         "InExCor": [
           {
@@ -1101,6 +1099,12 @@
           {
             "name": "The Arm of Lillsia",
             "coordinates": "0806:007F:0803:xxxx"
+          }
+        ],
+        "StarGazers Confederation": [
+          {
+            "name": "Huthati",
+            "coordinates": "07F7:0082:07FE:xxxx"
           }
         ]
       }
@@ -1384,6 +1388,10 @@
             "coordinates": "0804:007A:07FB:xxxx"
           },
           {
+            "name": "Holsitra Shallows",
+            "coordinates": "0803:007B:07F9:xxxx"
+          },
+          {
             "name": "Ijunlo Expanse",
             "coordinates": "0807:0077:0805:xxxx"
           },
@@ -1459,6 +1467,7 @@
         "Galactic Hub Calypso",
         "GenBra Space Corp",
         "InExCor",
+        "Intergalactic Space Force",
         "Khan Corporation",
         "NMS Mexico",
         "Oxalis",
@@ -1511,6 +1520,10 @@
           {
             "name": "Hertan",
             "coordinates": "0685:0082:043D:xxxx"
+          },
+          {
+            "name": "Hotigas",
+            "coordinates": "0687:0082:043D:xxxx"
           },
           {
             "name": "Hulqvis Adjunct",
@@ -1973,6 +1986,12 @@
           {
             "name": "Zulunti Nebula",
             "coordinates": "0803:007F:07F8:xxxx"
+          }
+        ],
+        "Intergalactic Space Force": [
+          {
+            "name": "Huridom",
+            "coordinates": "0804:0078:07FD:xxxx"
           }
         ],
         "Khan Corporation": [
@@ -2619,10 +2638,14 @@
       }
     },
     "Doshawchuc": {
-      "civilizations": [
-        "InExCor"
-      ],
+      "civilizations": ["InExCor"],
       "regions": {
+        "GenBra Space Corp": [
+          {
+            "name": "Hollin Anomaly",
+            "coordinates": "07FA:007D:0805:xxxx"
+          }
+        ],
         "InExCor": [
           {
             "name": "Lezerbi Nebula",
@@ -2784,9 +2807,7 @@
       }
     },
     "Drundemiso": {
-      "civilizations": [
-        "InExCor"
-      ],
+      "civilizations": ["InExCor"],
       "regions": {
         "InExCor": [
           {
@@ -2804,6 +2825,12 @@
           {
             "name": "Ufrvese Anomaly",
             "coordinates": "0800:007F:07F7:xxxx"
+          }
+        ],
+        "PanGalactic StarCabs": [
+          {
+            "name": "Kugasegn Expanse",
+            "coordinates": "0801:0087:07FF:xxxx"
           }
         ]
       }
@@ -3175,6 +3202,10 @@
           {
             "name": "Hiristi Anomaly",
             "coordinates": "030F:007B:0BE5:xxxx"
+          },
+          {
+            "name": "Hypihon Anomaly",
+            "coordinates": "096A:007E:017A:xxxx"
           },
           {
             "name": "Itchecat Sector",
@@ -4571,6 +4602,8 @@
         "Capital Triangle",
         "Carcharodon Merchant Fleet",
         "Central Empire",
+        "Chaos",
+        "Circle16",
         "Commonwealth of Alesia",
         "Commonwealth of Independent Systems",
         "Conure Republic",
@@ -4586,6 +4619,7 @@
         "Domus Stellaris Confederation",
         "Dopelord Confederacy",
         "Driggonian Empire",
+        "Duskbreaker",
         "EPIC",
         "Earthseed Civilization",
         "East Indica Company",
@@ -4640,12 +4674,14 @@
         "Helios Confederation of Independent Systems",
         "Hoskei-Oro Inc",
         "Hub Italiana",
+        "Immortal Alliance",
         "Imperium Astralis",
         "InExCor",
         "Intergalactic Coalition of Travelers",
         "Intergalactic Discoveries",
         "Intergalactic Mercenary Corporation",
         "Intergalactic Travellers Foundation",
+        "Interstellar Commerce Guild",
         "Interstellar Security Fleet",
         "Interstellar Syndicate of Tasks",
         "Iowar Republic",
@@ -4766,7 +4802,9 @@
         "The United Synthoid Worshipers",
         "The Vortex Defense Force",
         "The Wander Society",
+        "The resistance",
         "Three",
+        "Three Sons Syndicate",
         "Titan Echo",
         "Top of the Galaxy Hub",
         "Trailblazer Corporation",
@@ -5471,6 +5509,10 @@
             "coordinates": "040C:0072:0D0A:0xxx"
           },
           {
+            "name": "Lavreto Terminus",
+            "coordinates": "038A:0077:0D18:xxxx"
+          },
+          {
             "name": "Loymeyamu",
             "coordinates": "043E:0072:0D45:xxxx"
           },
@@ -5529,6 +5571,10 @@
           {
             "name": "Oastve Conflux",
             "coordinates": "05B0:007D:06FA:xxxx"
+          },
+          {
+            "name": "Ogtiansk Adjunct",
+            "coordinates": "0828:0077:0EBD:xxxx"
           },
           {
             "name": "Olungh",
@@ -5705,6 +5751,10 @@
           {
             "name": "Tusyapescl Conflux",
             "coordinates": "0E59:0082:07ED:xxxx"
+          },
+          {
+            "name": "Ubcanu",
+            "coordinates": "0E34:0079:0AFB:xxxx"
           },
           {
             "name": "Udgaru Expanse",
@@ -6001,6 +6051,14 @@
         ],
         "Black Star Order": [
           {
+            "name": "Ladjuk Spur",
+            "coordinates": "0DAD:0086:08AE:xxxx"
+          },
+          {
+            "name": "Laerdr Sector",
+            "coordinates": "0B87:007C:0BC8:xxxx"
+          },
+          {
             "name": "Myophosg Cloud",
             "coordinates": "0DAF:0086:08AE:xxxx"
           },
@@ -6095,6 +6153,10 @@
             "coordinates": "0DED:007A:0684:xxxx"
           },
           {
+            "name": "Xikeerhe",
+            "coordinates": "05C8:0083:090F:xxxx"
+          },
+          {
             "name": "Zelacek Cloud",
             "coordinates": "0EAA:007E:092A:xxxx"
           },
@@ -6151,6 +6213,18 @@
             "coordinates": "0867:0076:014D:xxxx"
           }
         ],
+        "Chaos": [
+          {
+            "name": "Lagresb Adjunct",
+            "coordinates": "0326:0082:0D06:xxxx"
+          }
+        ],
+        "Circle16": [
+          {
+            "name": "Lamhothat Void",
+            "coordinates": "0EC4:007C:0632:xxxx"
+          }
+        ],
         "Commonwealth of Alesia": [
           {
             "name": "Ilfhei Nebula",
@@ -6179,6 +6253,10 @@
           {
             "name": "Aizeta",
             "coordinates": "0188:0083:056C:xxxx"
+          },
+          {
+            "name": "Laportruj Shallows",
+            "coordinates": "0188:0083:056D:xxxx"
           }
         ],
         "Cungr Vanck Network": [
@@ -6247,6 +6325,12 @@
           {
             "name": "Qualan Sector",
             "coordinates": "0111:007C:0709:xxxx"
+          }
+        ],
+        "Duskbreaker": [
+          {
+            "name": "Lahtun Mass",
+            "coordinates": "047D:0082:0E10:xxxx"
           }
         ],
         "EPIC": [
@@ -7119,6 +7203,12 @@
           {
             "name": "Geneveia Fringe",
             "coordinates": "01B3:0080:05AA:xxxx"
+          }
+        ],
+        "Immortal Alliance": [
+          {
+            "name": "Imrita Nebula",
+            "coordinates": "0489:007E:0BA4:xxxx"
           }
         ],
         "Imperium Astralis": [
@@ -9085,6 +9175,12 @@
             "coordinates": "0642:007B:0152:xxxx"
           }
         ],
+        "Interstellar Commerce Guild": [
+          {
+            "name": "Kobulki",
+            "coordinates": "0E00:0085:0B6B:xxxx"
+          }
+        ],
         "Interstellar Security Fleet": [
           {
             "name": "Isinga",
@@ -9423,6 +9519,14 @@
           {
             "name": "Haesubamuru Boundary",
             "coordinates": "0803:0085:0803:xxxx"
+          },
+          {
+            "name": "Naghsinay",
+            "coordinates": "0804:0084:0804:xxxx"
+          },
+          {
+            "name": "Naghsinayehi Band",
+            "coordinates": "0804:0084:0804:xxxx"
           },
           {
             "name": "Sogardhiss",
@@ -9879,6 +9983,10 @@
           {
             "name": "Kuolunabu",
             "coordinates": "0AB1:0083:0183:xxxx"
+          },
+          {
+            "name": "Laculomiat Nebula",
+            "coordinates": "0D84:0072:0C32:xxxx"
           },
           {
             "name": "Logines Sector",
@@ -10577,10 +10685,22 @@
             "coordinates": "0EBA:0087:08D3:xxxx"
           }
         ],
+        "The resistance": [
+          {
+            "name": "Iswhel Instability",
+            "coordinates": "086D:007B:010B:xxxx"
+          }
+        ],
         "Three": [
           {
             "name": "Ewenst Adjunct",
             "coordinates": "03DD:0083:0268:xxxx"
+          }
+        ],
+        "Three Sons Syndicate": [
+          {
+            "name": "Lalwiyda Fringe",
+            "coordinates": "0A3E:0088:01A6:xxxx"
           }
         ],
         "Titan Echo": [
@@ -11535,6 +11655,7 @@
         "InExCor",
         "Morley Celestial Bureau",
         "The Council of Kings",
+        "The Mnemosyne Initiative",
         "The Oak Initiative",
         "Wanderers Association"
       ],
@@ -11653,6 +11774,12 @@
           {
             "name": "Sea of Cewende",
             "coordinates": "07F2:007E:010E:xxxx"
+          }
+        ],
+        "The Mnemosyne Initiative": [
+          {
+            "name": "Jaurtenob Expanse",
+            "coordinates": "02BA:0088:0EC2:xxxx"
           }
         ],
         "The Oak Initiative": [
@@ -12511,6 +12638,10 @@
             "coordinates": "07F7:007B:07FF:xxxx"
           },
           {
+            "name": "Nasmisi Terminus",
+            "coordinates": "07FA:0079:0802:xxxx"
+          },
+          {
             "name": "Oimudumu",
             "coordinates": "0245:007F:0BBA:xxxx"
           },
@@ -13362,6 +13493,7 @@
         "Legion of Mandoran",
         "Morley Celestial Bureau",
         "Mud Bunny 11",
+        "Queer Anarchist Travellers",
         "Riven Minerals and Exploration",
         "The Stargate Imperium",
         "UFIPA"
@@ -13489,6 +13621,12 @@
           {
             "name": "Oskokoja Conflux",
             "coordinates": "0891:007E:0EFF:xxxx"
+          }
+        ],
+        "Queer Anarchist Travellers": [
+          {
+            "name": "Hurrode Sector",
+            "coordinates": "01B9:007D:0B0B:xxxx"
           }
         ],
         "Riven Minerals and Exploration": [
@@ -14730,10 +14868,14 @@
       }
     },
     "Moglaschil": {
-      "civilizations": [
-        "InExCor"
-      ],
+      "civilizations": ["InExCor"],
       "regions": {
+        "GenBra Space Corp": [
+          {
+            "name": "Kakinir Void",
+            "coordinates": "0805:0081:07FA:xxxx"
+          }
+        ],
         "InExCor": [
           {
             "name": "Innutl",
@@ -18959,10 +19101,14 @@
       }
     },
     "Yekathsebehn": {
-      "civilizations": [
-        "InExCor"
-      ],
+      "civilizations": ["InExCor"],
       "regions": {
+        "GenBra Space Corp": [
+          {
+            "name": "Kipiboe Anomaly",
+            "coordinates": "0807:007E:07FF:xxxx"
+          }
+        ],
         "InExCor": [
           {
             "name": "Doyeru",

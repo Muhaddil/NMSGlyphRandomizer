@@ -210,6 +210,8 @@ const fetchCivilizationsPage = async (offset = 0) => {
   params.append('format', 'json');
   params.append('origin', '*');
 
+  params.append('where', 'Civilized IS NOT NULL AND Civilized <> "Uncharted" AND Coordinates IS NOT NULL AND Galaxy IS NOT NULL');
+
   const url = `${apiPath}?${params.toString()}`;
   console.log(url)
   console.log(`Fetching page with offset: ${offset}`);
@@ -237,7 +239,7 @@ const fetchAllCivilizationsAndRegions = async () => {
     let hasMore = true;
     let requestCount = 0;
     const maxRequestsPerSession = Infinity;
-    const minValidDataThreshold = 50;
+    const minValidDataThreshold = 250;
     const startTime = Date.now();
     console.log(`Starting from cached offset: ${offset}`);
 
@@ -270,7 +272,7 @@ const fetchAllCivilizationsAndRegions = async () => {
           setCachedData('nms_partial_civilizations_cache', partialCacheData);
 
           console.log(`Total valid items so far: ${allData.length}`);
-          if (pageData.length < 50) {
+          if (pageData.length < minValidDataThreshold) {
             hasMore = false;
             console.log('Last page reached (less than 50 raw items)');
           } else {
