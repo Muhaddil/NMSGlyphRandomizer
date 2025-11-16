@@ -19,7 +19,7 @@ let validItemsProcessed = 0;
 
 const loadDefaultData = async () => {
   try {
-    const response = await fetch("/public/assets/defaultData/defaultData.json");
+    const response = await fetch("/NMSGlyphRandomizer/public/assets/defaultData/defaultData.json");
     if (!response.ok) throw new Error("Could not load defaultData.json");
     const data = await response.json();
 
